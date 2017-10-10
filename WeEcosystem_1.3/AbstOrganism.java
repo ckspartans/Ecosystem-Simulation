@@ -14,8 +14,8 @@ public abstract class AbstOrganism extends Actor
     MyWorld world; //reference to the myworld class
     //GreenfootImage image; // Reference to the organism's image
     static protected ArrayList <AbstOrganism> lifeforms = new ArrayList <AbstOrganism>();//list of all the organsims in the game
-    public ArrayList <AbstOrganism> prey;//list of all that the types of organism can feed on
-    public ArrayList <AbstOrganism> predators;//list of all the types of organsims that the organism can be eaten by 
+    protected ArrayList <AbstOrganism> prey;//list of all that the types of organism can feed on
+    protected ArrayList <AbstOrganism> predators;//list of all the types of organsims that the organism can be eaten by 
     protected int age; //increases as the time passes until it reaches its limit
     protected int size; //radius of the organims
     protected int energy; //the amount of energy an organism posses, used to move gaind through eating

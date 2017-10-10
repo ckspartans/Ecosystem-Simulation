@@ -49,8 +49,6 @@ public class Algae extends AbstOrganism
         num_split = stats [3]; //number of offspring an organism can produce
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
-        
-        // Add your action code here.\
         // If the world reference is not stored:
         if (world == null) {
         
@@ -69,7 +67,7 @@ public class Algae extends AbstOrganism
         eat ();
         grow ();
         split ();
-        shift();   
+      shift();   
         
     }
     
@@ -82,9 +80,7 @@ public class Algae extends AbstOrganism
     }
     
     public void grow() {
-        
          // Modify the size of the image based on  the current energy
-        
         size = (int) (0.02 * energy + 5); //Change in size
         GreenfootImage image = new GreenfootImage(size, size); 
         image.setColor(Color.BLUE);
@@ -95,11 +91,9 @@ public class Algae extends AbstOrganism
     }
     
     public void split(){
-        
         angle_split = 360 / num_split;
         // Check to see if there if enough energy (size?) to split
         if (energy >= split_energy) {
-        
             // If yes, then call the constructor for two new ones and kill the parent
             energy -= split_energy; // Subtract the used up energy needed to split.
             
@@ -107,10 +101,8 @@ public class Algae extends AbstOrganism
             for (int i = 0; i < num_split; i ++) {
             
                 Algae temp_Splited = new Algae ();
-
                 //lifeforms.add(new Algae());
-                world.addObject(temp_Splited, getX(), getY());
-                
+                world.addObject(temp_Splited, getX(), getY());      
                 temp_Splited.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
                 temp_Splited.move(7);
             
@@ -123,25 +115,26 @@ public class Algae extends AbstOrganism
     }
     
     public void age() {
-        
-        age +=2;
-        
       
+         
+        age +=1;
+        
+        if (age >= lifespan) {    
+              die();
+        }
     
     }
     
     public void die() {
         
         // Checks to see if past lifespan
-        if (age >= lifespan) {    
-
-        }
+      
         
         // Remove this object from its lists
         lifeforms.remove(this);
         // Remove from the world
         world.removeObject(this);
-        
+        return;
     
     }
     
