@@ -67,7 +67,7 @@ public class Algae extends AbstOrganism
         eat ();
         grow ();
         split ();
-      //shift();   
+        shift();   
         
     }
     
@@ -93,7 +93,7 @@ public class Algae extends AbstOrganism
     public void split(){
         angle_split = 360 / num_split;
         // Check to see if there if enough energy (size?) to split
-        if (energy >= split_energy) {
+        if (energy >= split_energy && age < lifespan) {
             // If yes, then call the constructor for two new ones and kill the parent
             energy -= split_energy; // Subtract the used up energy needed to split.
             
@@ -117,7 +117,7 @@ public class Algae extends AbstOrganism
     public void age() {
       
          
-        age +=1;
+        age +=2;
         
         if (age >= lifespan) {    
               die();
@@ -185,7 +185,7 @@ public class Algae extends AbstOrganism
             turn(-10);
         }
                 
-        energy--;
+        //energy--;
     } //a function the allows the organism to move around randomly 
     
     public void shift(int action, AbstOrganism target) {
