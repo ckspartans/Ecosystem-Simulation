@@ -2,8 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * The producer class, the lowest trophic level of 1, Algae.
- * @author Mudaser, Shusil, Tim, Parmeet, Hawke  
+ * The producer class, the lowest trophic level of 0, Algae.
+ * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
  * @version 10/10/2017
  */
 public class Algae extends AbstOrganism 
