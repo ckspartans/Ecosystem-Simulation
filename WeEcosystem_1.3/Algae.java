@@ -67,7 +67,7 @@ public class Algae extends AbstOrganism
         eat ();
         grow ();
         split ();
-      shift();   
+      //shift();   
         
     }
     
