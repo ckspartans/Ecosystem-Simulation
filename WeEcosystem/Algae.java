@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * The producer class, the lowest trophic level of 0, Algae.
  * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
- * @version 10/10/2017
+ * @version 12/10/2017
  */
 public class Algae extends AbstOrganism 
 {
@@ -24,8 +24,7 @@ public class Algae extends AbstOrganism
         image.drawOval(0, 0, size, size);   // Draws oval with the given size on top of transparent image 
         image.fillOval(0, 0, size, size);   // Fills oval with the current color
         this.setImage(image);                  // Sets this as an actor image
-        lifeforms = new ArrayList <AbstOrganism> ();//list of all the organsims in the game
-        lifeforms.add(this);
+        lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         trophic_lvl = 0; // The trophic level of the organism, its place in the food web / chain
@@ -75,8 +74,7 @@ public class Algae extends AbstOrganism
         
         // Increases the energy amount.
         energy += 2;
-        world.showText(""+energy, 150,100);
-        world.showText(""+deaths, 150,150);
+        
     }
     
     public void grow() {
