@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * The producer class, the lowest trophic level of 0, Algae.
  * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
- * @version 10/10/2017
+ * @version 12/10/2017
  */
 public class Algae extends AbstOrganism 
 {
@@ -19,13 +19,21 @@ public class Algae extends AbstOrganism
     // Base Constructor
     public Algae () {
         
+        
+      
+       
         GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given size
         image.setColor(Color.BLUE);        // Sets the color green
         image.drawOval(0, 0, size, size);   // Draws oval with the given size on top of transparent image 
         image.fillOval(0, 0, size, size);   // Fills oval with the current color
-        this.setImage(image);                  // Sets this as an actor image
+<<<<<<< HEAD:WeEcosystem_1.3/Algae.java
+        this.setImage(image);                  // Sets this as an actor image 
         lifeforms = new ArrayList <AbstOrganism> ();//list of all the organsims in the game
         lifeforms.add(this);
+=======
+        this.setImage(image);                  // Sets this as an actor image
+        lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
+>>>>>>> bbcc3f93a2837557dc60d26e479bd737dc9effbc:WeEcosystem/Algae.java
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         trophic_lvl = 0; // The trophic level of the organism, its place in the food web / chain
@@ -75,19 +83,24 @@ public class Algae extends AbstOrganism
         
         // Increases the energy amount.
         energy += 2;
-        world.showText(""+energy, 150,100);
-        world.showText(""+deaths, 150,150);
+        
     }
     
     public void grow() {
          // Modify the size of the image based on  the current energy
         size = (int) (0.02 * energy + 5); //Change in size
+        GreenfootImage image1 = new GreenfootImage(size+50, size+50); 
+        image1.setColor(Color.BLACK);
+        image1.drawOval(0, 0, size+50, size+50);
+        image1.fillOval(0, 0, size+50, size+50);
+        this.setImage(image1);
+     
         GreenfootImage image = new GreenfootImage(size, size); 
         image.setColor(Color.BLUE);
         image.drawOval(0, 0, size, size);
         image.fillOval(0, 0, size, size);
         this.setImage(image);
-       
+      
     }
     
     public void split(){

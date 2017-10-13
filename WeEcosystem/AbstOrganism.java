@@ -4,8 +4,8 @@ import java.util.*;
 /**
  * 
  * This class sets the traits and behaviours that are common throughout the organisms  
- * @author Mudaser, Shusil, Tim, Parmeet, Hawke  
- * @version 10/3/2017
+ * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
+ * @version 12/10/2017
  * 
  */
 
