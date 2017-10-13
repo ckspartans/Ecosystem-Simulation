@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * The producer class, the lowest trophic level of 0, Algae.
  * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
- * @version 10/10/2017
+ * @version 12/10/2017
  */
 public class Algae extends AbstOrganism 
 {
@@ -25,8 +25,7 @@ public class Algae extends AbstOrganism
         image.setColor(Color.GREEN);        // Sets the color green
         
         this.setImage(image);                  // Sets this as an actor image
-        lifeforms = new ArrayList <AbstOrganism> ();//list of all the organsims in the game
-        lifeforms.add(this);
+        lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         trophic_lvl = 0; // The trophic level of the organism, its place in the food web / chain
@@ -77,7 +76,11 @@ public class Algae extends AbstOrganism
         
         // Increases the energy amount.
         energy += 2;
+<<<<<<< HEAD:WeEcosystem_1.3/Algae.java
        
+=======
+        
+>>>>>>> bbcc3f93a2837557dc60d26e479bd737dc9effbc:WeEcosystem/Algae.java
     }
     
     public void grow() {
@@ -94,7 +97,7 @@ public class Algae extends AbstOrganism
     public void split(){
         angle_split = 360 / num_split;
         // Check to see if there if enough energy (size?) to split
-        if (energy >= split_energy) {
+        if (energy >= split_energy && age < lifespan) {
             // If yes, then call the constructor for two new ones and kill the parent
             energy -= split_energy; // Subtract the used up energy needed to split
             // A for loop running once for each num_Split (child to be made)
@@ -117,7 +120,7 @@ public class Algae extends AbstOrganism
     public void age() {
       
          
-        age +=1;
+        age +=2;
         
         if (age >= lifespan) {    
               die();
@@ -185,7 +188,7 @@ public class Algae extends AbstOrganism
             turn(-10);
         }
                 
-        energy--;
+        //energy--;
     } //a function the allows the organism to move around randomly 
     
     public void shift(int action, AbstOrganism target) {
