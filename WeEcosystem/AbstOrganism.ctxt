@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AbstOrganism
-comment0.text=\r\n\ \r\n\ This\ class\ sets\ the\ traits\ and\ behaviours\ that\ are\ common\ throughout\ the\ organisms\ \ \r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\ @version\ 12/10/2017\r\n\ \r\n
+comment0.text=\r\n\ \r\n\ This\ class\ sets\ the\ traits\ and\ behaviours\ that\ are\ common\ throughout\ the\ organisms\ \ \r\n\ @author\ Mudaser,\ Shusil,\ Tim,\ Parmeet,\ Hawke\ \ \r\n\ @version\ 10/3/2017\r\n\ \r\n
 comment1.params=
 comment1.target=void\ act()
 comment10.params=s

@@ -2,47 +2,60 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * 
- * 
  * Write a description of class MyWorld here.
- * @author Hawke, Mudaser, Parmeet, Shusil, Tim   
- * @version 12/10/2017
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
  */
 public class MyWorld extends World
 {
-     //arraly organism
-     
-     
+
     /**
      * Constructor for objects of class MyWorld.
-     * 
+     *  
      */
+    
+   // IntroScreen intro;
+    
+    public TestOrganism subject1;
+    int foodEaten = 0;
+    
+    
     public MyWorld()
     {    
-        
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(1920, 1080, 1, false); //600,400
+        //intro = new IntroScreen(this);
+       // Greenfoot.setWorld(intro);
+        setPaintOrder (TestOrganism.class);
+        
+        subject1 = new TestOrganism(120); // initiate with the radius value (>0)
+        addObject(subject1, 300, 200);
+        
+        
         
         // Resets the lifeforms array list
         AbstOrganism.lifeforms = new ArrayList ();
         
+        
     }
     
     public void act () {
-    
-        showText("" + AbstOrganism.lifeforms.size(), 200, 200);
-    
+        
+        if (Greenfoot.isKeyDown("space")) {
+        
+            removeObject(subject1);
+        
+        }
+        
+        showText("Food Eaten: " + foodEaten, 100, 20);
+        // Check if the lifeforms list contains at least one item
+        if (AbstOrganism.lifeforms != null) {
+            
+            showText("Lifeforms: " + AbstOrganism.lifeforms.size(), 500, 100);
+            
+        }
+        
     }
     
-    /*
-    public void addOrg(AbstOrganism input){
-        
-        
-        
-        
-        
-    }
-    */
-   //addPlants(abstorganism input)
-    //organism.add(input);
 }

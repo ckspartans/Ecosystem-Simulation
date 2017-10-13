@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Algae
-comment0.text=\r\n\ The\ producer\ class,\ the\ lowest\ trophic\ level\ of\ 0,\ Algae.\r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\ @version\ 12/10/2017\r\n
+comment0.text=\r\n\ The\ producer\ class,\ the\ lowest\ trophic\ level\ of\ 1,\ Algae.\r\n\ @author\ Mudaser,\ Shusil,\ Tim,\ Parmeet,\ Hawke\ \ \r\n\ @version\ 10/3/2017\r\n
 comment1.params=
 comment1.target=Algae()
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ Algae\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n

@@ -2,15 +2,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * The producer class, the lowest trophic level of 0, Algae.
- * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
- * @version 12/10/2017
+ * The producer class, the lowest trophic level of 1, Algae.
+ * @author Mudaser, Shusil, Tim, Parmeet, Hawke  
+ * @version 10/3/2017
  */
 public class Algae extends AbstOrganism 
 {
-    
-     private int size = 1; // Starting size of an organism
-     
     /**
      * Act - do whatever the Algae wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -19,18 +16,17 @@ public class Algae extends AbstOrganism
     // Base Constructor
     public Algae () {
         
-        GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given siz
-        image.drawOval(0, 0, size, size);   // Draws oval with the given size on top of transparent image 
-        image.fillOval(0, 0, size, size);   // Fills oval with the current color
-        image.setColor(Color.GREEN);        // Sets the color green
         
-        this.setImage(image);                  // Sets this as an actor image
-        lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
+        
+        lifeforms = new ArrayList <AbstOrganism> ();//list of all the organsims in the game
+        lifeforms.add(this);
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
-        predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
+        predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by 
+        
         trophic_lvl = 0; // The trophic level of the organism, its place in the food web / chain
         age = 0; // An int that increments each time act runs to store the age
-        energy = 0; //Starts with zero energy
+        size = (int) (0.2 * energy + 5);
+        energy = 0;
         hasMutated = false;
         deaths = 0;
         
@@ -42,6 +38,12 @@ public class Algae extends AbstOrganism
     
     public void act() 
     {
+        
+       GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given size
+       image.setColor(Color.BLUE);        // Sets the color green
+       // Draws oval with the given size on top of transparent image
+       image.fillOval(0, 0, size, size);   // Fills oval with the current color
+       this.setImage(image);                  // Sets this as an actor image
        
         lifespan = stats [0]; //max limit an organism can be in the world 
         speed = stats [1]; //rate of movement of the organism 
@@ -50,6 +52,7 @@ public class Algae extends AbstOrganism
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
         
+        // Add your action code here.\
         // If the world reference is not stored:
         if (world == null) {
         
@@ -68,7 +71,9 @@ public class Algae extends AbstOrganism
         eat ();
         grow ();
         split ();
-        shift();   
+        shift();
+        //getImage().scale(10, 10);
+        
         
     }
     
@@ -76,36 +81,44 @@ public class Algae extends AbstOrganism
         
         // Increases the energy amount.
         energy += 2;
-<<<<<<< HEAD:WeEcosystem_1.3/Algae.java
-       
-=======
-        
->>>>>>> bbcc3f93a2837557dc60d26e479bd737dc9effbc:WeEcosystem/Algae.java
+        world.showText(""+energy, 100,100);
+         world.showText(""+deaths, 200,100);
     }
     
     public void grow() {
-         // Modify the size of the image based on  the current energy
-        size = (int) (0.02 * energy + 5); //Change in size
-        GreenfootImage image = new GreenfootImage(size, size); 
-        image.setColor(Color.GREEN);
-        image.drawOval(0, 0, size, size);
-        image.fillOval(0, 0, size, size);
-        this.setImage(image);
+        
+       size = (int) (0.02 * energy + 5);
+        
+       GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given size
+       image.setColor(Color.BLUE);        // Sets the color 
+       // Draws oval with the given size on top of transparent image
+       image.fillOval(0, 0, size, size);   // Fills oval with the current color
+       this.setImage(image); 
        
+        // Modify the size of the image based on  the current energy
+        
+       //getImage().scale(size,size);
+        // GreenfootImage img = new GreenfootImage (size, size);
     }
     
     public void split(){
+        
         angle_split = 360 / num_split;
+        
         // Check to see if there if enough energy (size?) to split
-        if (energy >= split_energy && age < lifespan) {
+        if (energy >= split_energy) {
+        
             // If yes, then call the constructor for two new ones and kill the parent
-            energy -= split_energy; // Subtract the used up energy needed to split
+            energy -= split_energy; // Subtract the used up energy needed to split.
+            
             // A for loop running once for each num_Split (child to be made)
             for (int i = 0; i < num_split; i ++) {
             
                 Algae temp_Splited = new Algae ();
+
                 //lifeforms.add(new Algae());
-                world.addObject(temp_Splited, getX(), getY());      
+                world.addObject(temp_Splited, getX(), getY());
+                
                 temp_Splited.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
                 temp_Splited.move(7);
             
@@ -114,30 +127,39 @@ public class Algae extends AbstOrganism
             die();
             
         }
+        
+        //say ("split not implemented");
     
     }
     
     public void age() {
-      
-         
-        age +=2;
         
+        
+        // Increases age
+        age +=2;
+        // Checks to see if past lifespan
         if (age >= lifespan) {    
-              die();
+            
         }
+        
+        if(getOneIntersectingObject(eaters.class)!=null){
+        
+            getWorld().removeObject(this);
+            
+        }
+        
+        //say ("age not implemented");
     
     }
     
     public void die() {
         
-        // Checks to see if past lifespan
-      
         
         // Remove this object from its lists
         lifeforms.remove(this);
         // Remove from the world
         world.removeObject(this);
-        return;
+        //say ("die not implemented");
     
     }
     
@@ -188,7 +210,7 @@ public class Algae extends AbstOrganism
             turn(-10);
         }
                 
-        //energy--;
+        energy--;
     } //a function the allows the organism to move around randomly 
     
     public void shift(int action, AbstOrganism target) {
