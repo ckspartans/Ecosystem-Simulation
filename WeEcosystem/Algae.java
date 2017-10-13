@@ -24,6 +24,7 @@ public class Algae extends AbstOrganism
         image.drawOval(0, 0, size, size);   // Draws oval with the given size on top of transparent image 
         image.fillOval(0, 0, size, size);   // Fills oval with the current color
         this.setImage(image);                  // Sets this as an actor image
+
         lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
@@ -48,6 +49,7 @@ public class Algae extends AbstOrganism
         num_split = stats [3]; //number of offspring an organism can produce
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
+        
         // If the world reference is not stored:
         if (world == null) {
         
@@ -58,8 +60,10 @@ public class Algae extends AbstOrganism
         
         //preforms a mutation once in the organisms lifetime 
         if (hasMutated == false) {
+            
             mutate ();
             hasMutated = true;
+            
         }
         
         age ();
@@ -78,6 +82,7 @@ public class Algae extends AbstOrganism
     }
     
     public void grow() {
+        
          // Modify the size of the image based on  the current energy
         size = (int) (0.02 * energy + 5); //Change in size
         GreenfootImage image = new GreenfootImage(size, size); 
@@ -88,7 +93,8 @@ public class Algae extends AbstOrganism
        
     }
     
-    public void split(){
+    public void split() {
+        
         angle_split = 360 / num_split;
         // Check to see if there if enough energy (size?) to split
         if (energy >= split_energy && age < lifespan) {
@@ -99,7 +105,6 @@ public class Algae extends AbstOrganism
             for (int i = 0; i < num_split; i ++) {
             
                 Algae temp_Splited = new Algae ();
-                //lifeforms.add(new Algae());
                 world.addObject(temp_Splited, getX(), getY());      
                 temp_Splited.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
                 temp_Splited.move(7);
@@ -114,25 +119,23 @@ public class Algae extends AbstOrganism
     
     public void age() {
       
-         
         age +=2;
         
+        // Checks to see if past lifespan
         if (age >= lifespan) {    
+            
               die();
+              
         }
     
     }
     
     public void die() {
         
-        // Checks to see if past lifespan
-      
-        
         // Remove this object from its lists
         lifeforms.remove(this);
         // Remove from the world
         world.removeObject(this);
-        return;
     
     }
     
@@ -169,28 +172,35 @@ public class Algae extends AbstOrganism
                 stats [mutating] = (int) getRandomNumber(2, 6);
             
             }     
+            
         }
+        
     }
     
-    public void shift() {
+    public void shift() { //a function the allows the organism to move around randomly 
+        
         int turn_direction = 0;
 
         move(speed);
         if(turn_direction == 0){
+            
             turn(10);
+            
         }
         else{
+            
             turn(-10);
+            
         }
                 
-        //energy--;
-    } //a function the allows the organism to move around randomly 
+       
+    } 
     
-    public void shift(int action, AbstOrganism target) {
+    public void shift(int action, AbstOrganism target) { //a function the allows the organism to move based on detect command 
     
         
     
-    } //a function the allows the organism to move based on detect command 
+    } 
     
     public int detect (int trophic_lvl) {
     
@@ -200,8 +210,10 @@ public class Algae extends AbstOrganism
     
     public int getRandomNumber(int start, int end)
     {
+        
        int normal = Greenfoot.getRandomNumber(end-start+1);
        return normal+start;
+    
     }
     
 }
