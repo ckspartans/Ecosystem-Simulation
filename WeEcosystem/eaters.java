@@ -31,7 +31,7 @@ public void shimee(){
     
        
       move(Greenfoot.getRandomNumber(5)+5);
-        turn(Greenfoot.getRandomNumber(3)+30);
+       turn(Greenfoot.getRandomNumber(4)-2);
       
     
     
