@@ -19,6 +19,7 @@ public class Algae extends AbstOrganism
     // Base Constructor
     public Algae () {
         
+<<<<<<< HEAD:WeEcosystem/Algae.java
         
       
        
@@ -34,6 +35,15 @@ public class Algae extends AbstOrganism
         this.setImage(image);                  // Sets this as an actor image
         lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
 >>>>>>> bbcc3f93a2837557dc60d26e479bd737dc9effbc:WeEcosystem/Algae.java
+=======
+        GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given siz
+        image.drawOval(0, 0, size, size);   // Draws oval with the given size on top of transparent image 
+        image.fillOval(0, 0, size, size);   // Fills oval with the current color
+        image.setColor(Color.GREEN);        // Sets the color green
+        
+        this.setImage(image);                  // Sets this as an actor image
+        lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
+>>>>>>> 5daf4168162ad454c8fac2c356907743d1ccc20d:WeEcosystem/Algae.java
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         trophic_lvl = 0; // The trophic level of the organism, its place in the food web / chain
@@ -57,6 +67,7 @@ public class Algae extends AbstOrganism
         num_split = stats [3]; //number of offspring an organism can produce
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
+        
         // If the world reference is not stored:
         if (world == null) {
         
@@ -83,7 +94,15 @@ public class Algae extends AbstOrganism
         
         // Increases the energy amount.
         energy += 2;
+<<<<<<< HEAD:WeEcosystem/Algae.java
         
+=======
+<<<<<<< HEAD:WeEcosystem_1.3/Algae.java
+       
+=======
+        
+>>>>>>> bbcc3f93a2837557dc60d26e479bd737dc9effbc:WeEcosystem/Algae.java
+>>>>>>> 5daf4168162ad454c8fac2c356907743d1ccc20d:WeEcosystem/Algae.java
     }
     
     public void grow() {
@@ -96,7 +115,7 @@ public class Algae extends AbstOrganism
         this.setImage(image1);
      
         GreenfootImage image = new GreenfootImage(size, size); 
-        image.setColor(Color.BLUE);
+        image.setColor(Color.GREEN);
         image.drawOval(0, 0, size, size);
         image.fillOval(0, 0, size, size);
         this.setImage(image);
@@ -108,8 +127,7 @@ public class Algae extends AbstOrganism
         // Check to see if there if enough energy (size?) to split
         if (energy >= split_energy && age < lifespan) {
             // If yes, then call the constructor for two new ones and kill the parent
-            energy -= split_energy; // Subtract the used up energy needed to split.
-            
+            energy -= split_energy; // Subtract the used up energy needed to split
             // A for loop running once for each num_Split (child to be made)
             for (int i = 0; i < num_split; i ++) {
             

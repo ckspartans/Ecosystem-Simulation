@@ -1,5 +1,9 @@
 #Greenfoot properties
+<<<<<<< HEAD
 #Fri Oct 13 12:37:44 EDT 2017
+=======
+#Thu Oct 12 12:19:45 EDT 2017
+>>>>>>> 5daf4168162ad454c8fac2c356907743d1ccc20d
 readme.name=@README
 class.Algae.superclass=AbstOrganism
 target2.name=AbstOrganism
@@ -34,13 +38,18 @@ target1.showInterface=false
 target3.typeParameters=
 target1.name=Algae
 editor.fx.0.width=816
+class.MyWorld.image=recycpap.jpg
 editor.fx.1.height=984
 editor.fx.1.width=640
 readme.y=10
 target2.typeParameters=
 target3.name=MyWorld
 readme.x=10
+<<<<<<< HEAD
 mainWindow.width=1370
+=======
+mainWindow.width=1378
+>>>>>>> 5daf4168162ad454c8fac2c356907743d1ccc20d
 target1.typeParameters=
 editor.fx.1.y=0
 editor.fx.1.x=0
@@ -49,9 +58,17 @@ target2.width=100
 mainWindow.height=744
 mainWindow.y=0
 target1.width=80
+<<<<<<< HEAD
 mainWindow.x=-8
 dependency4.from=MyWorld
 target3.width=80
+=======
+dependency4.from=MyWorld
+mainWindow.x=-8
+target3.width=80
+dependency4.to=AbstOrganism
+class.Algae.image=beeper.png
+>>>>>>> 5daf4168162ad454c8fac2c356907743d1ccc20d
 editor.fx.0.y=-4
 dependency4.to=AbstOrganism
 class.Algae.image=blue-draught.png
