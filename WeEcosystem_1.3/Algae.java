@@ -19,10 +19,11 @@ public class Algae extends AbstOrganism
     // Base Constructor
     public Algae () {
         
-        GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given size
-        image.setColor(Color.BLUE);        // Sets the color green
+        GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given siz
         image.drawOval(0, 0, size, size);   // Draws oval with the given size on top of transparent image 
         image.fillOval(0, 0, size, size);   // Fills oval with the current color
+        image.setColor(Color.GREEN);        // Sets the color green
+        
         this.setImage(image);                  // Sets this as an actor image
         lifeforms = new ArrayList <AbstOrganism> ();//list of all the organsims in the game
         lifeforms.add(this);
@@ -49,6 +50,7 @@ public class Algae extends AbstOrganism
         num_split = stats [3]; //number of offspring an organism can produce
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
+        
         // If the world reference is not stored:
         if (world == null) {
         
@@ -67,7 +69,7 @@ public class Algae extends AbstOrganism
         eat ();
         grow ();
         split ();
-      //shift();   
+        shift();   
         
     }
     
@@ -75,15 +77,14 @@ public class Algae extends AbstOrganism
         
         // Increases the energy amount.
         energy += 2;
-        world.showText(""+energy, 150,100);
-        world.showText(""+deaths, 150,150);
+       
     }
     
     public void grow() {
          // Modify the size of the image based on  the current energy
         size = (int) (0.02 * energy + 5); //Change in size
         GreenfootImage image = new GreenfootImage(size, size); 
-        image.setColor(Color.BLUE);
+        image.setColor(Color.GREEN);
         image.drawOval(0, 0, size, size);
         image.fillOval(0, 0, size, size);
         this.setImage(image);
@@ -95,8 +96,7 @@ public class Algae extends AbstOrganism
         // Check to see if there if enough energy (size?) to split
         if (energy >= split_energy) {
             // If yes, then call the constructor for two new ones and kill the parent
-            energy -= split_energy; // Subtract the used up energy needed to split.
-            
+            energy -= split_energy; // Subtract the used up energy needed to split
             // A for loop running once for each num_Split (child to be made)
             for (int i = 0; i < num_split; i ++) {
             
