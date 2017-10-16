@@ -1,7 +1,10 @@
+
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*;
 
 /**
+ * 
+ * 
  * Write a description of class MyWorld here.
  * 
  * @author (your name) 
@@ -9,35 +12,56 @@ import java.util.*;
  */
 public class MyWorld extends World
 {
-
+     //arraly organism
+       int foodEaten = 0;
+     
     /**
      * Constructor for objects of class MyWorld.
-     *  
+     * 
      */
-
-    // IntroScreen intro;
-
-    public Omnivore subject1;
-    int foodEaten = 0;
-
     public MyWorld()
     {    
+        
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(500, 500, 1); //600,400
-        //intro = new IntroScreen(this);
-        // Greenfoot.setWorld(intro);
-        setPaintOrder (Omnivore.class);
-
-        subject1 = new Omnivore(20); // initiate with the radius value (>0), if the radius is too big it can see the whole map, if too small it must be very close to see
-        addObject(subject1, 300, 200);
-
-        // Resets the lifeforms array list
-        AbstOrganism.lifeforms = new ArrayList ();
-
+        super(800, 600, 1); 
+        
     }
-
-    public void act () {
-
+    
+    
+    
+    
+      public void act() 
+    {
+        
+        //creat new world if world is not created yet
+      
+      display();
+       
     }
-   
+    
+    int algtotal;
+    
+     public void display(){
+          int algtotal =  getObjects(Algae.class).size(); // Total Algae in the screen
+          showText("Algae: "+algtotal, 100,150);
+          
+          int Herbtotal = getObjects(Herbivore.class).size();   // Total herbivores in the screen
+            showText("Herbivore: "+Herbtotal, 100,200);
+
+            
+            showText("foodEaten: "+foodEaten, 100,250);     // Total food they ate
+    }
+    
+    
+    /*
+    public void addOrg(AbstOrganism input){
+        
+        sho
+        
+        
+        
+    }
+    */
+   //addPlants(abstorganism input)
+    //organism.add(input);
 }

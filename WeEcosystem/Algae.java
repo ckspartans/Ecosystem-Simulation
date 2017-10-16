@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
-
+import java.util.ArrayList.*;
 /**
  * The producer class, the lowest trophic level of 0, Algae.
  * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
@@ -10,7 +10,6 @@ public class Algae extends AbstOrganism
 {
     
      private int size = 1; // Starting size of an organism
-     
     /**
      * Act - do whatever the Algae wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -55,19 +54,18 @@ public class Algae extends AbstOrganism
             world = (MyWorld) getWorld (); // Store the reference to the current world
         
         }   
-        // If the image reference is not stored:
-        
+   
         //preforms a mutation once in the organisms lifetime 
         if (hasMutated == false) {
             mutate ();
             hasMutated = true;
         }
         
-        age ();
-        eat ();
-        grow ();
-        split ();
-        shift();   
+         age ();     // Increases age by 1 every time the act method executes
+        eat ();     // Increases energy by 1 every time the act method executes, adds 5 each time they eat other organism
+        grow ();    // Grow depending on energy they have
+        shift();    // Randomly moves around
+        split();    // Reproduces when reaches the certain stage
         
     }
     
@@ -93,7 +91,7 @@ public class Algae extends AbstOrganism
     public void split(){
         angle_split = 360 / num_split;
         // Check to see if there if enough energy (size?) to split
-        if (energy >= split_energy && age < lifespan) {
+        if (canReproduce()==true) {
             // If yes, then call the constructor for two new ones and kill the parent
             energy -= split_energy; // Subtract the used up energy needed to split.
             
@@ -113,6 +111,14 @@ public class Algae extends AbstOrganism
         }
     
     }
+    
+    public boolean canReproduce(){
+        if(energy >= split_energy && age < lifespan){
+        return true;
+    }else{
+    return false;
+}
+}
     
     public void age() {
       
@@ -135,7 +141,7 @@ public class Algae extends AbstOrganism
         // Remove from the world
         world.removeObject(this);
         return;
-    
+     
     }
     
     
@@ -193,6 +199,7 @@ public class Algae extends AbstOrganism
         
     
     } //a function the allows the organism to move based on detect command 
+   
     
     public int detect (int trophic_lvl) {
     
