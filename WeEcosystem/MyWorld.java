@@ -14,48 +14,30 @@ public class MyWorld extends World
      * Constructor for objects of class MyWorld.
      *  
      */
-    
-   // IntroScreen intro;
-    
-    public TestOrganism subject1;
+
+    // IntroScreen intro;
+
+    public Omnivore subject1;
     int foodEaten = 0;
-    
-    
+
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1920, 1080, 1, false); //600,400
+        super(500, 500, 1); //600,400
         //intro = new IntroScreen(this);
-       // Greenfoot.setWorld(intro);
-        setPaintOrder (TestOrganism.class);
-        
-        subject1 = new TestOrganism(120); // initiate with the radius value (>0)
+        // Greenfoot.setWorld(intro);
+        setPaintOrder (Omnivore.class);
+
+        subject1 = new Omnivore(20); // initiate with the radius value (>0), if the radius is too big it can see the whole map, if too small it must be very close to see
         addObject(subject1, 300, 200);
-        
-        
-        
+
         // Resets the lifeforms array list
         AbstOrganism.lifeforms = new ArrayList ();
-        
-        
+
     }
-    
+
     public void act () {
-        
-        if (Greenfoot.isKeyDown("space")) {
-        
-            removeObject(subject1);
-        
-        }
-        
-        showText("Food Eaten: " + foodEaten, 100, 20);
-        // Check if the lifeforms list contains at least one item
-        if (AbstOrganism.lifeforms != null) {
-            
-            showText("Lifeforms: " + AbstOrganism.lifeforms.size(), 500, 100);
-            
-        }
-        
+
     }
-    
+   
 }
