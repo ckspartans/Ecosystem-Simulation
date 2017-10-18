@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=StartScreen
+comment0.text=\ StartScreen\r\n\r\n\ The\ starting\ screen\ of\ the\ program,\ it\ provides\ the\ users\ with\ the\ list\ of\ authors,\ can\ be\ clicked\ on\ to\ move\ to\ the\ rest\ of\ the\ program.\r\n\r\n\ \r\n\r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\ @version\ 17/10/2017\r\n\r\n
+comment1.params=
+comment1.target=StartScreen()
+comment2.params=w
+comment2.target=StartScreen(MyWorld)
+comment3.params=
+comment3.target=void\ act()
+numComments=4
