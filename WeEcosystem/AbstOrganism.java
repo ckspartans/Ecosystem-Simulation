@@ -47,6 +47,8 @@ public abstract class AbstOrganism extends Actor
         
     }
 
+
+    protected abstract List givesOffList();
     protected abstract void eat(); //determins amount of energy one gains, % of the prey's enrgy, for algae this is a constant intake  
 
     protected abstract void grow(); //is directly porportional to the energy of the organism, scaling is set by the siz 

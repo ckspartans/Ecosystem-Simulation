@@ -8,21 +8,22 @@ import java.util.ArrayList.*;
  */
 public class Algae extends AbstOrganism 
 {
-    
-     private int size = 1; // Starting size of an organism
+
+    private int size = 1; // Starting size of an organism
+    int timer = 0;
     /**
      * Act - do whatever the Algae wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
+
     // Base Constructor
     public Algae () {
-        
+
         GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given size
         image.setColor(Color.BLACK);        // Sets the color black
         image.drawOval(0, 0, size, size);   // Draws oval with the given size on top of transparent image 
-       image.setColor(Color.RED);        // Sets the color red
-         image.fillOval(0, 0, size, size);   // Fills oval with the current color
+        image.setColor(Color.RED);        // Sets the color red
+        image.fillOval(0, 0, size, size);   // Fills oval with the current color
         this.setImage(image);                  // Sets this as an actor image
         lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
@@ -32,16 +33,14 @@ public class Algae extends AbstOrganism
         energy = 0; //Starts with zero energy
         hasMutated = false;
         deaths = 0;
-        
+
         stats = new int [] {300, 1, 1, 2, 200, 2}; //traits for algae 
-        
-        
-    
+
     }
     
     public void act() 
     {
-       
+
         lifespan = stats [0]; //max limit an organism can be in the world 
         speed = stats [1]; //rate of movement of the organism 
         range = stats [2]; // Int storing detection range
@@ -50,34 +49,34 @@ public class Algae extends AbstOrganism
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
         // If the world reference is not stored:
         if (world == null) {
-        
+
             world = (MyWorld) getWorld (); // Store the reference to the current world
-        
+
+            
         }   
-   
+
         //preforms a mutation once in the organisms lifetime 
         if (hasMutated == false) {
             mutate ();
             hasMutated = true;
         }
-        
-         age ();     // Increases age by 1 every time the act method executes
-        eat ();     // Increases energy by 1 every time the act method executes, adds 5 each time they eat other organism
-        grow ();    // Grow depending on energy they have
-        shift();    // Randomly moves around
-        split();    // Reproduces when reaches the certain stage
-        
+        timer++;
+        if(timer%2 == 0){
+            age ();     // Increases age by 1 every time the act method executes
+            eat ();     // Increases energy by 1 every time the act method executes, adds 5 each time they eat other organism
+            grow ();    // Grow depending on energy they have
+            split();    // Reproduces when reaches the certain stage
+        }
     }
-    
+
     public void eat() {
-        
         // Increases the energy amount.
         energy += 1;
-        
+
     }
-    
+
     public void grow() {
-         // Modify the size of the image based on  the current energy
+        // Modify the size of the image based on  the current energy
         size = (int) (0.02 * energy + 5); //Change in size
         GreenfootImage image = new GreenfootImage(size, size); 
         image.setColor(Color.BLACK);
@@ -85,132 +84,113 @@ public class Algae extends AbstOrganism
         image.setColor(Color.RED);        // Sets the color green
         image.fillOval(0, 0, size, size);
         this.setImage(image);
-       
+
     }
-    
+
     public void split(){
         angle_split = 360 / num_split;
         // Check to see if there if enough energy (size?) to split
         if (canReproduce()==true) {
             // If yes, then call the constructor for two new ones and kill the parent
             energy -= split_energy; // Subtract the used up energy needed to split.
-            
+
             // A for loop running once for each num_Split (child to be made)
             for (int i = 0; i < num_split; i ++) {
-            
+
                 Algae temp_Splited = new Algae ();
-                //lifeforms.add(new Algae());
                 world.addObject(temp_Splited, getX(), getY());      
                 temp_Splited.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
-                temp_Splited.move(7);
-            
+                temp_Splited.move(20);
+
             }
-            
+
             die();
-            
+
         }
-    
+
     }
-    
+
     public boolean canReproduce(){
         if(energy >= split_energy && age < lifespan){
-        return true;
-    }else{
-    return false;
-}
-}
-    
-    public void age() {
-      
-         
-        age +=1;
-        
-        if (age >= lifespan) {    
-              die();
+            return true;
+        }else{
+            return false;
         }
-    
     }
-    
+
+    public void age() {
+
+        age +=1;
+        if (age >= lifespan) {    
+            world.addObject(new Carcass(energy), getX(), getY());
+            die();
+        }
+
+    }
+
     public void die() {
-        
-        // Checks to see if past lifespan
-      
-        
+
         // Remove this object from its lists
         lifeforms.remove(this);
         // Remove from the world
         world.removeObject(this);
-        return;
-     
+
+        
     }
     
-    
     public void mutate() {
-   
         //say ("Mutate not implemented");
         for (int i = 0; i < stats [5]; i ++) {
-        
+
             int mutating = (int) Greenfoot.getRandomNumber (stats.length - 1);
-            
+
             if (mutating == 0) { // lifespan
-            
-                stats [mutating] = (int) getRandomNumber(100, 500);
-            
+
+                stats [mutating] = (int) getRandomNumber(700, 1000);
+
             } else if (mutating == 1) { // speed
-            
+
                 stats [mutating] = (int) getRandomNumber(1, 3);
-            
+
             } else if (mutating == 2) { // range
-            
+
                 stats [mutating] = (int) getRandomNumber(1, 5);
-            
+
             } else if (mutating == 3) { // num_split
-            
-                stats [mutating] = (int) getRandomNumber(1, 2);
-            
-            } else if (mutating == 4) { // split_energy
-            
-                stats [mutating] = (int) getRandomNumber(200, 500);
-            
-            } else if ( mutating == 5) { // mutation_rate
-            
+
                 stats [mutating] = (int) getRandomNumber(2, 4);
-            
+
+            } else if (mutating == 4) { // split_energy
+
+                stats [mutating] = (int) getRandomNumber(800, 1500);
+
+            } else if ( mutating == 5) { // mutation_rate
+
+                stats [mutating] = (int) getRandomNumber(2, 4);
+
             }     
         }
     }
+
+    public List<Herbivore> givesOffList() {
+ return null;
+}
     
     public void shift() {
-        int turn_direction = 0;
-
-        move(speed);
-        if(turn_direction == 0){
-            turn(10);
-        }
-        else{
-            turn(-10);
-        }
-                
-        //energy--;
-    } //a function the allows the organism to move around randomly 
-    
-    public void shift(int action, AbstOrganism target) {
-    
         
-    
+    } //a function the allows the organism to move around randomly 
+
+    public void shift(int action, AbstOrganism target) {
+
     } //a function the allows the organism to move based on detect command 
-   
-    
     public int detect (int trophic_lvl) {
-    
         return 0;
-    
     }
-    
+
     public int getRandomNumber(int start, int end)
     {
-       int normal = Greenfoot.getRandomNumber(end-start+1);
-       return normal+start;
+        int normal = Greenfoot.getRandomNumber(end-start+1);
+        return normal+start;
     }
-    
+
 }
