@@ -88,11 +88,11 @@ public class Carcass extends AbstOrganism
 
         image.setColor(Color.BLACK);
 
-        image.drawOval(0, 0, size, size);
+        image.drawOval(0, 0, size+10, size+10);
 
         image.setColor(Color.BLUE);        // Sets the color green
 
-        image.fillOval(0, 0, size, size);
+        image.fillOval(0, 0, size+10, size+10);
 
         this.setImage(image);
 

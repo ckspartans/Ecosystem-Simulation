@@ -247,7 +247,7 @@ public class Algae extends AbstOrganism
 
         age +=1;
 
-        if (age >= lifespan) {    
+        if (age >= lifespan && energy >= 0) {    
 
             world.addObject(new Carcass(energy), getX(), getY());
 

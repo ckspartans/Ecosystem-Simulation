@@ -296,7 +296,7 @@ public class Carnivore extends AbstOrganism
 
         age += 1; //Increase age by 1
 
-        if (age >= lifespan) {    // If it is less than or equal to its lifespan
+        if (age >= lifespan && energy >= 0) {    // If it is less than or equal to its lifespan
 
             world.addObject(new Carcass(energy), getX(), getY());
 
