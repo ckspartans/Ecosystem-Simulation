@@ -27,6 +27,7 @@ public class Herbivore extends AbstOrganism
 
     // Base Constructor
     protected int range = 120; // range, default using 1
+    Sight mySight;
     protected Algae target = null; // when it is null, player has no target
     Carnivore carnivore = new Carnivore();
     
@@ -44,7 +45,7 @@ public class Herbivore extends AbstOrganism
         energy = 500; //Starts with zero energy
 
         stats = new int [] {300, 1, 120, 2, 200, 2}; //traits for Herbivore 
-
+        mySight = new Sight (this);
         this.range = range; // Range equals random number that is set during reproduction, how far the detection radius is for the organism
 
     }
@@ -83,6 +84,12 @@ public class Herbivore extends AbstOrganism
             world = (MyWorld) getWorld (); // Store the reference to the current world
 
         }   
+        
+        if (mySight.getWorld() == null) {
+        
+            world.addObject(mySight, getX(), getY());
+            
+        }
 
         if (target == null) { // when player has no target, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
