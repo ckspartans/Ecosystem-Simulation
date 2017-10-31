@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Carnivore
-comment0.text=\ Carnivore\r\n\r\n\ A\ Carnivore\ tries\ to\ track\ down\ and\ eat\ any\ herbivores\ in\ range.\r\n\r\n\ \r\n\r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\r\n\ @version\ 12/10/2017\r\n\r\n
+comment0.text=\ Carnivore\r\n\ A\ Carnivore\ tries\ to\ track\ down\ and\ eat\ any\ herbivores\ in\ range.\r\n\ \r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\ @version\ 12/10/2017\r\n
 comment1.params=
 comment1.target=Carnivore()
 comment10.params=

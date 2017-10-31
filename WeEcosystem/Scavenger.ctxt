@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Scavenger
-comment0.text=\ Scavenger\r\n\r\n\ Scavengers\ feed\ off\ of\ the\ dead\ bodies\ of\ other\ organisms.\r\n\r\n\ \r\n\r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\ @version\ 17/10/2017\r\n\r\n
+comment0.text=\ Scavenger\r\n\ Scavengers\ feed\ off\ of\ the\ dead\ bodies\ of\ other\ organisms.\r\n\ \r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\ @version\ 17/10/2017\r\n\r\n
 comment1.params=
 comment1.target=Scavenger()
 comment10.params=

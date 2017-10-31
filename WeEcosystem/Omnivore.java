@@ -1,28 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 import java.util.*;
 
-/** Carnivore
- * A Carnivore tries to track down and eat any herbivores in range.
+/**
+ * Write a description of class Omnivore here.
  * 
- * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
- * @version 12/10/2017
+ * @author (your name) 
+ * @version (a version number or a date)
  */
-public class Carnivore extends AbstOrganism
+public class Omnivore extends Carnivore
 {
-    /**
-
-     * Act - do whatever the Algae wants to do. This method is called whenever
-
-     * the 'Act' or 'Run' button gets pressed in the environment.
-
-     */
-
-    // Base Constructor
     protected int radius = 120; // radius, default using 1
-    public Herbivore target = null; // when it is null, player has no target
-
-    public Carnivore() {
+    protected Algae target2 = null; // when it is null, player has no target2
+    protected Herbivore target = null; // when it is null, player has no target2
+    
+    public Omnivore() {
 
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
 
@@ -30,7 +21,7 @@ public class Carnivore extends AbstOrganism
 
         image.drawRect(0, 0, size+10, size+10);   // Draws oval with the given size+10 on top of transparent image 
 
-        image.setColor(Color.BLACK);        // Sets the color red
+        image.setColor(Color.WHITE);        // Sets the color red
 
         image.fillRect(0, 0, size+10, size+10);   // Fills oval with the current color
 
@@ -44,13 +35,13 @@ public class Carnivore extends AbstOrganism
 
         age = 0; // An int that increments each time act runs to store the age
 
-        energy = 500; 
+        energy = 10; 
 
         stats = new int [] {300, 2, 120, 2, 200, 2}; //traits for Herbivore 
 
     }
 
-    public Carnivore (int [] newStats) {
+    public Omnivore (int [] newStats) {
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
         image.setColor(Color.BLACK);        // Sets the color black
         image.drawRect(0, 0, size+10, size+10);   // Draws oval with the given size+10 on top of transparent image 
@@ -80,23 +71,45 @@ public class Carnivore extends AbstOrganism
         split_energy = stats [4]; //set energy needed to perform a split
 
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
-        
-        
+
         AI.checkPrey(this);
+        
         // If the world reference is not stored:
         if (world == null) {
 
             world = (MyWorld) getWorld (); // Store the reference to the current world
 
         }   
+       
+        /*
+        if(getOneIntersectingObject(Herbivore.class) != null){
+           AbstOrganism.lifeforms.remove(this);
+           world.removeObject(this);     
+        }
+        */
 
-        if (target == null) { // when player has no target, using keyboard controller
+        if (target2 == null) { // when player has no target2, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
-        } else { // else player moves automatically to the target 
+        } else { // else player moves automatically to the target2 
             AI.hunt(this); // Attacks preys
         }
 
-        Herbivore herbivore = (Herbivore) getOneIntersectingObject(Herbivore.class);
+        Algae algae = (Algae) getOneIntersectingObject(Algae.class);
+
+        if (algae != null) {
+
+            world.foodEaten ++;          // Increases foodeaten, a variable in My World
+
+            energy += (algae.energy)/2; //energy gained after eating
+
+            AbstOrganism.lifeforms.remove(algae);
+            world.removeObject(algae);      // Removes Algae object
+
+            target2 = null; // clear the target2 after removing the apple
+
+        }
+        
+          Herbivore herbivore = (Herbivore) getOneIntersectingObject(Herbivore.class);
 
         if (herbivore != null) {
 
@@ -110,8 +123,16 @@ public class Carnivore extends AbstOrganism
             target = null; // clear the target after removing the apple
 
         }
+        
+        
+        if (target == null) { // when player has no target2, using keyboard controller
+            AI.checkPrey(this); // after each movement, check whether the food is in sight
+        } else { // else player moves automatically to the target2 
+            AI.hunt(this); // Attacks preys
+        }
 
-        age ();     // Increases age by 1 every time the act method executes
+
+       // age ();     // Increases age by 1 every time the act method executes
 
         eat ();     // Increases energy by 1 every time the act method executes, adds 5 each time they eat other organism
 
@@ -123,30 +144,42 @@ public class Carnivore extends AbstOrganism
 
     }
 
-    public List<Herbivore> givesOffList() {
+    public List<Algae> givesOffList2() {
 
-        List<Herbivore> list = getObjectsInRange(range, Herbivore.class); // List of organisms around 
+        List<Algae> list = getObjectsInRange(range, Algae.class); // List of organisms around 
 
         return list;
     }
+    
 
-    public void eat() {
-        // THIS IS HANDLED WITH HUNT
-    }
     public void grow() {
+
         // Modify the size+10 of the image based on  the current energy
+
         size = (int) (0.02 * energy + 5); //Change in size+10
+
         GreenfootImage image = new GreenfootImage(size+10, size+10); 
+
         image.setColor(Color.BLACK);
+
         image.drawRect(0, 0, size+10, size+10);
-        image.setColor(Color.BLACK);        // Sets the color green
+
+        image.setColor(Color.WHITE);        // Sets the color green
+
         image.fillRect(0, 0, size+10, size+10);
+
         this.setImage(image);
+
     }
+
     public void split(){
+
         angle_split = 360 / num_split;              // In which angle would the child go 
+
         // Check to see if there if enough energy (size?) to split
+
         if (energy >= split_energy && age < lifespan) {
+
             // If yes, then call the constructor for two new ones and kill the parent
             // energy -= split_energy; // Subtract the used up energy needed to split.
 
@@ -156,7 +189,7 @@ public class Carnivore extends AbstOrganism
 
                 //range = getRandomNumber(500, 700); in case range does not mutate 
 
-                Carnivore temp_Splitted = new Carnivore(stats);//this is where the mutation for new radius is 
+                Omnivore temp_Splitted = new Omnivore(stats);//this is where the mutation for new radius is 
 
                 Mutation.mutate(temp_Splitted);
 
@@ -168,51 +201,6 @@ public class Carnivore extends AbstOrganism
             die();
         }
 
-    }
-
-    protected List givesOffListPredator(){ // List of organisms around
-
-        return null;
-    }
-
-    public void age() {
-
-        age += 1; //Increase age by 1
-        if (age >= lifespan) {    // If it is less than or equal to its lifespan
-            world.addObject(new Carcass(energy), getX(), getY());
-            die();                // dies
-        }
-
-    }
-
-    public void die() {
-
-        // Remove this object from its lists
-        lifeforms.remove(this);
-        // Remove from the world
-        world.removeObject(this);
-
-    }
-
-    public void shift(){
-        move(speed); //adjust speed ranging form 2-8 
-        //randomize turning left and right
-        if(Greenfoot.getRandomNumber(100)<10){
-            turn(Greenfoot.getRandomNumber(90)-45);
-        }
-        //if at the edge turn away 
-        if(age<lifespan && isAtEdge()==true){
-
-            turn(180);
-
-        }
-
-    }
-
-    public int getRandomNumber(int start, int end)
-    {
-        int normal = Greenfoot.getRandomNumber(end-start+1);
-        return normal+start;
     }
 
 }

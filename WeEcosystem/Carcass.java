@@ -30,6 +30,14 @@ public class Carcass extends AbstOrganism
         leftEnergy = energy;
 
     }
+     public Carcass () {
+
+        leftEnergy = energy;
+
+    }
+    
+
+    
 
 
 
@@ -84,15 +92,15 @@ public class Carcass extends AbstOrganism
 
         size = (int) (0.02 * leftEnergy + 5); //Change in size
 
-        GreenfootImage image = new GreenfootImage(size, size); 
+        GreenfootImage image = new GreenfootImage(size+5, size+5); 
 
         image.setColor(Color.BLACK);
 
-        image.drawOval(0, 0, size+10, size+10);
+        image.drawOval(0, 0, size, size);
 
         image.setColor(Color.BLUE);        // Sets the color green
 
-        image.fillOval(0, 0, size+10, size+10);
+        image.fillOval(0, 0, size, size);
 
         this.setImage(image);
 
