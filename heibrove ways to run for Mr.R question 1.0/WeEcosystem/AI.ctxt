@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=AI
+comment0.text=\r\n\ This\ class\ handles\ the\ AI\ abilities\ that\ the\ organisms\ have\r\n\ \r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\ @version\ 17/10/2017\r\n
+comment1.params=Org2
+comment1.target=void\ checkPrey(AbstOrganism)
+comment2.params=Org2
+comment2.target=void\ checkPredator(AbstOrganism)
+comment3.params=herb
+comment3.target=void\ checkPredatorHerb(Herbivore)
+comment4.params=Org2
+comment4.target=void\ flee(AbstOrganism)
+comment5.params=Org2
+comment5.target=void\ hunt(AbstOrganism)
+numComments=6
