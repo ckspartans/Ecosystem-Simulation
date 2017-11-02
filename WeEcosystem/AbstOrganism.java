@@ -26,8 +26,11 @@ public abstract class AbstOrganism extends Actor
 
     MyWorld world; //reference to the myworld class
 
-    //GreenfootImage image; // Reference to the organism's image
-
+    //GreenfootImage image; // Reference to the organism's imagehk  llob     
+    
+    public boolean isAttached = false;
+     
+    
     static public ArrayList <AbstOrganism> lifeforms = new ArrayList <AbstOrganism>();//list of all the organsims in the game
 
     protected ArrayList <AbstOrganism> prey;//list of all that the types of organism can feed on
@@ -38,15 +41,14 @@ public abstract class AbstOrganism extends Actor
 
     protected int size; //radius of the organims
 
-    protected int energy; //the amount of energy an organism posses, used to move gaind through eating
+    protected int energy; //the amount of energy an organism posses, used to move gaind through eatingF
+    protected int angle_split; // The base angle between the offspring of an organim, for example, an algae splitting into 2 would have 180 degrees between them (360 / numsplit) before randomization FFFFFGFGJJJJJTP P 
 
-    protected int angle_split; // The base angle between the offspring of an organim, for example, an algae splitting into 2 would have 180 degrees between them (360 / numsplit) before randomization
-
-
-
-    // Mutatable Stats
-
-    protected int[] stats = new int [6]; // An int array storing the mutatable stats of the organism
+    protected Sight mySight;
+  // Mutatable Stats
+ 
+    protected int trophicLevel;
+ protected int[] stats = new int [6]; // An int array storing the mutatable stats of the organism
 
     protected int lifespan = stats [0]; //max limit an organism can be in the world 
 
@@ -60,6 +62,7 @@ public abstract class AbstOrganism extends Actor
 
     protected int mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
 
+    protected int attack;
     
 
     
@@ -71,7 +74,7 @@ public abstract class AbstOrganism extends Actor
 
     }
 
-    protected abstract List givesOffList(); // List of organisms around
+    protected abstract List givesOffList(int radius); // List of organisms around
     
     
     protected abstract List givesOffListPredator(); // List of organisms around
@@ -92,6 +95,7 @@ public abstract class AbstOrganism extends Actor
     protected abstract void age(); //a counter that keeps increasing as a means of time 
 
 
+    protected abstract void fights(int _energy);
 
     protected abstract void die(); //removes the organism 
 
