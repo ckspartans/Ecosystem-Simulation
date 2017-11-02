@@ -110,25 +110,26 @@ public class AI
         int addEnergy=0;           // Energy that will be added based on whos fighting and against who
         Org2.world.showText("Eneg : "+ addEnergy, 100, 450);        // Just for testing
         if(Org2.trophicLevel == 2){     // If it is Carnivore
-            addEnergy = (Org2.attack - target.attack); // It basically gives you the positive value
+            addEnergy = (Org2.attack - target.defense); // It basically gives you the positive value
             Org2.fights(addEnergy); // then that positive value(addEnergy) will be added to organism's energy
 
         }
         if(Org2.trophicLevel == 1){       // If it is Herbivore
 
-            addEnergy = (Org2.attack - target.attack);// It basically gives you the positive value
+            addEnergy = (Org2.attack - target.defense);// It basically gives you the positive value
             Org2.fights(addEnergy); // then that positive value(addEnergy) will be added to organism's energy
 
         }
         if(target.trophicLevel == 1){       // If it is Herbivore
 
-            addEnergy = (target.attack - Org2.attack); // It gives you negative 
+            addEnergy = (target.defense - Org2.attack); // It gives you negative 
             target.fights(addEnergy); // Negative value when added to energy subtracts the orgs. energy
 
         }
-        if(Org2.trophicLevel == 0){         // If it is Algae
-
-            addEnergy = (target.attack - Org2.attack); // It gives you negative 
+        if(target.trophicLevel == 0){         // If it is Algae
+            target.move(10);     // Just to make it look like its defending 
+            target.turn(40);       // Just to make it look like its defending 
+            addEnergy = (target.defense - Org2.attack); // It gives you negative 
             target.fights(addEnergy);    // Negative value when added to energy subtracts the orgs. energy
 
         }

@@ -121,13 +121,18 @@ public class Scavenger extends AbstOrganism
         }
     }
 
-    public List<AbstOrganism> givesOffList() {
+    public List<AbstOrganism> givesOffList(int rad) {
 
         List<AbstOrganism> list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
 
         return list;
     }
 
+       protected void fights(int _energy){    // Basically the calculation of attack and defense 
+    
+    }
+
+    
     protected void hunt(){
         // getWorld().showText("Im dead", 159,225);
         // double valueX = 0; 
@@ -193,9 +198,7 @@ public class Scavenger extends AbstOrganism
 
                 temp_Splitted.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
 
-
             }
-
             die();
         }
 
@@ -217,31 +220,19 @@ public class Scavenger extends AbstOrganism
 
     public void die() {
 
-
         // Remove this object from its lists
-
         lifeforms.remove(this);
-
         // Remove from the world
-
         world.removeObject(this);
-
 
     }
 
-
     public void shift(){
-
         move(speed); //adjust speed ranging form 2-8 
-
         //randomize turning left and right
-
         if(Greenfoot.getRandomNumber(100)<10){
-
             turn(Greenfoot.getRandomNumber(90)-45);
-
         }
-
         //if at the edge turn away 
         if(age<lifespan && isAtEdge()==true){
 

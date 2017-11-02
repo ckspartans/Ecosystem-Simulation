@@ -15,7 +15,7 @@ public class Sight extends Actor
     public Sight(){
 
     }
-  
+
     public Sight(AbstOrganism _o, int _range){
         range = _range; // Equals the range that was sent in from AI
         GreenfootImage image = new GreenfootImage(_range, _range); // Creates an empty transparent image with the given size
@@ -41,8 +41,7 @@ public class Sight extends Actor
             getWorld().removeObject(this);  // If there is no Parent Organism and some how this actor gets added, it will delete then
 
         }
-        
-         
+
        
     }    
 

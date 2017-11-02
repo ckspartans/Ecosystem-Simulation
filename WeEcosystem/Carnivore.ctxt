@@ -3,6 +3,7 @@ comment0.target=Carnivore
 comment0.text=\ Carnivore\r\n\r\n\ A\ Carnivore\ tries\ to\ track\ down\ and\ eat\ any\ herbivores\ in\ range.\r\n\r\n\ \r\n\r\n\ @author\ Hawke,\ Mudaser,\ Parmeet,\ Shusil,\ Tim\ \ \r\n\r\n\ @version\ 12/10/2017\r\n\r\n
 comment1.params=
 comment1.target=Carnivore()
+comment1.text=\r\n\r\n\ Act\ -\ do\ whatever\ the\ Algae\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n\r\n
 comment10.params=
 comment10.target=void\ age()
 comment11.params=

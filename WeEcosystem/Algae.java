@@ -19,7 +19,6 @@ public class Algae extends AbstOrganism
 {
 
 
-
     private int size = 1; // Starting size of an organism
 
     /**
@@ -31,11 +30,9 @@ public class Algae extends AbstOrganism
      */
 
 
-
     // Base Constructor
 
     public Algae () {
-
 
 
         GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given size
@@ -58,15 +55,19 @@ public class Algae extends AbstOrganism
 
         age = 0; // An int that increments each time act runs to store the age
 
-        energy = 0; //Starts with zero energy
+        energy = 10; //Starts with zero energy
 
+        trophicLevel = 0;   // Trophic level zero means its Algae
+
+        attack = 0;
+
+        defense = 1;
 
         stats = new int [] {300, 1, 1, 2, 200, 2}; //traits for algae 
 
     }
-    
-    public Algae (int [] newStats) {
 
+    public Algae (int [] newStats) {
 
 
         GreenfootImage image = new GreenfootImage(size, size); // Creates an empty transparent image with the given size
@@ -95,12 +96,10 @@ public class Algae extends AbstOrganism
 
     }
 
-    
 
     public void act() 
 
     {
-
 
 
         lifespan = stats [0]; //max limit an organism can be in the world 
@@ -120,14 +119,11 @@ public class Algae extends AbstOrganism
         if (world == null) {
 
 
-
             world = (MyWorld) getWorld (); // Store the reference to the current world
-
 
 
         }   
 
-        
 
         if(world.timer % 2 == 0){
 
@@ -143,111 +139,68 @@ public class Algae extends AbstOrganism
 
     }
 
-
-     public List<AbstOrganism> givesOffList() {
+    public List<AbstOrganism> givesOffList(int radius) {
          
-         
-    List<AbstOrganism> list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
-    
-    
-    return list;
-}
+        List<AbstOrganism> list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+
+        return list;
+    }
 
     
-    
-
     public void eat() {
-
         // Increases the energy amount.
-
         energy += 1;
 
-
-
     }
-
-
 
     public void grow() {
-
         // Modify the size of the image based on  the current energy
-
         size = (int) (0.02 * energy + 5); //Change in size
-
         GreenfootImage image = new GreenfootImage(size, size); 
-
         image.setColor(Color.BLACK);
-
         image.drawOval(0, 0, size, size);
-
         image.setColor(Color.RED);        // Sets the color green
-
         image.fillOval(0, 0, size, size);
-
         this.setImage(image);
-
-
 
     }
 
-
-
     public void split(){
-
         // Check to see if there if enough energy (size?) to split
-
         if (energy >= split_energy && age < lifespan) {
-
             // If yes, then call then create num_split new organisms, and mutate them.
             int angle_split = 360 / num_split;
 
-       
 
             // If yes, then call the constructor for two new ones and kill the parent
 
             energy -= split_energy; // Subtract the used up energy needed to split.
 
 
-
             // A for loop running once for each num_Split (child to be made)
 
             for (int i = 0; i < num_split; i ++) {
-               
-                
+
                 Algae temp_splitted = new Algae (stats);
-               
                 Mutation.mutate (temp_splitted);
-
                 world.addObject(temp_splitted, getX(), getY());      
-
                 temp_splitted.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
-
                 temp_splitted.move(20);
-
             }
-
-
 
             die();
 
-
-
         }
-            
-        }
+    }
 
 
-
-
-    
     
     public void age() {
 
 
-
         age +=1;
 
-        if (age >= lifespan && energy >= 0) {    
+        if (age >= lifespan) {    
 
             world.addObject(new Carcass(energy), getX(), getY());
 
@@ -256,53 +209,37 @@ public class Algae extends AbstOrganism
         }
 
 
-
     }
 
+    protected void fights(int _energy){    // Basically the calculation of attack and defense 
+        energy += _energy;
+        if(energy < 0){
+            die();
+        }
 
+    }
 
     public void die() {
 
-
-
         // Remove this object from its lists
-
         lifeforms.remove(this);
-
         // Remove from the world
-
         world.removeObject(this);
 
-
-
         
-
     }
-
     
-
     public void shift() {
-
         
-
     } //a function the allows the organism to move around randomly 
-
- protected List givesOffListPredator(){ // List of organisms around
-
+    protected List givesOffListPredator(){ // List of organisms around
         return null;
     }
-    
 
     public void shift(int action, AbstOrganism target) {
 
-
-
     } //a function the allows the organism to move based on detect command 
-
     public int detect (int trophic_lvl) {
-
         return 0;
-
     }
-
 }

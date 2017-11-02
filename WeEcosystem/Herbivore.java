@@ -3,7 +3,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 
-
 /** Herbivore
 
  * A Herbivore tries to track down and eat any algae in range.
@@ -19,9 +18,7 @@ public class Herbivore extends AbstOrganism
 {
 
 
-
     private int size = 1; // Starting size+10 of an organism
-
 
 
     /**
@@ -33,80 +30,47 @@ public class Herbivore extends AbstOrganism
      */
 
 
-
     // Base Constructor
 
-   // protected int range = 120; // range, default using 1
+    // protected int range = 120; // range, default using 1
 
-    protected Algae target = null; // when it is null, player has no target
+    //protected Algae target = null; // when it is null, player has no target
 
     Carnivore carnivore = new Carnivore();
 
-
     
-
     
-
     public Herbivore () {
-
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
-
         image.setColor(Color.BLACK);        // Sets the color black
-
         image.drawRect(0, 0, size+10, size+10);   // Draws oval with the given size+10 on top of transparent image 
-
         image.setColor(Color.GREEN);        // Sets the color red
-
         image.fillRect(0, 0, size+10, size+10);   // Fills oval with the current color
-
         this.setImage(image);                  // Sets this as an actor image
-
         lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
-
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
-
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
-
         age = 0; // An int that increments each time act runs to store the age
-
         energy = 50; //Starts with zero energy
-
         trophicLevel = 1;   // Trophic level one means its herbivore
-        
         attack = 2;
-
+        defense = 2;    // Defending armour level 2
         stats = new int [] {300, 1, 120, 2, 200, 2}; //traits for Herbivore 
-
         this.range = range; // Range equals random number that is set during reproduction, how far the detection radius is for the organism
-
     }
-
     
-
     public Herbivore (int [] newStats) {
-
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
-
         image.setColor(Color.BLACK);        // Sets the color black
-
         image.drawRect(0, 0, size+10, size+10);   // Draws oval with the given size+10 on top of transparent image 
-
         image.setColor(Color.GREEN);        // Sets the color red
-
         image.fillRect(0, 0, size+10, size+10);   // Fills oval with the current color
-
         this.setImage(image);                  // Sets this as an actor image
-
         lifeforms.add(this); // Adds this algae to the list containing all objects under the class type of AbstOrganism
-
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
-
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
-
         age = 0; // An int that increments each time act runs to store the age
-
         energy = 50; //Starts with zero energy
-
 
         stats = newStats; //traits for Herbivore 
 
@@ -115,11 +79,9 @@ public class Herbivore extends AbstOrganism
     }
 
 
-
     public void act() 
 
     {
-
 
 
         lifespan = stats [0]; //max limit an organism can be in the world 
@@ -135,11 +97,10 @@ public class Herbivore extends AbstOrganism
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
 
 
+        // AI.checkPrey(this, stats[2]); // Regular one
 
-       // AI.checkPrey(this, stats[2]); // Regular one
-
-        AI.checkPrey(this); // For try
-        AI.checkPredator(this);
+        //   AI.checkPrey(this); // For try
+        //  AI.checkPredator(this);
 
         // fights();
         // If the world reference is not stored:
@@ -147,31 +108,26 @@ public class Herbivore extends AbstOrganism
         if (world == null) {
 
 
-
             world = (MyWorld) getWorld (); // Store the reference to the current world
-
 
 
         }   
 
 
+        //  if (target == null) { // when player has no target, using keyboard controller
+        AI.checkPrey(this); // after each movement, check whether the food is in sight
+        //AI.getTheClosest(stats[2], this); // For try
+        AI.checkPredator(this);
 
-
-        if (target == null) { // when player has no target, using keyboard controller
-
-            AI.checkPrey(this); // after each movement, check whether the food is in sight
-           //AI.getTheClosest(stats[2], this); // For try
-            AI.checkPredator(this);
-           
-        } 
+        // } 
         /*else { // else player moves automatically to the target 
 
-            AI.hunt(this); // Attacks preys
+        AI.hunt(this); // Attacks preys
 
-            AI.flee(this);
+        AI.flee(this);
         }
 
-*/
+         */
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
 
@@ -183,12 +139,10 @@ public class Herbivore extends AbstOrganism
 
             ((MyWorld) getWorld()).removeObject(algae);      // Removes Algae object
 
-            target = null; // clear the target after removing the apple
-
+            // target = null; // clear the target after removing the apple
 
 
         }
-
 
 
         age ();     // Increases age by 1 every time the act method executes
@@ -206,32 +160,30 @@ public class Herbivore extends AbstOrganism
     }
 
 
+    public List<Algae> givesOffList(int radius) { //List of preys around
+        // Radius is the value inputted in AI
+        List<Algae> list = getObjectsInRange(radius, Algae.class); // List of Algae around 
 
-
-public List<Algae> givesOffList(int radius) { //List of preys around
-           // Radius is the value inputted in AI
-    List<Algae> list = getObjectsInRange(radius, Algae.class); // List of Algae around 
-    
-    return list;
-}
-
-  protected List givesOffListPredator(){ // List of predator around
-
-      List<Carnivore> list = getObjectsInRange(range, Carnivore.class); // List of Carnvivores around 
-      
         return list;
-    
     }
-  
-protected void fights(int _energy){
-    
-    energy += _energy;
-    
-    if(energy < 0){
-        die();
+
+    protected List givesOffListPredator(){ // List of predator around
+
+        List<Carnivore> list = getObjectsInRange(range, Carnivore.class); // List of Carnvivores around 
+
+        return list;
+
     }
-    
-}
+
+    protected void fights(int _energy){
+
+        energy += _energy;
+
+        if(energy < 0){
+            die();
+        }
+
+    }
 
     public void eat() {
 
@@ -240,9 +192,7 @@ protected void fights(int _energy){
         //energy += 1;
 
 
-
     }
-
 
 
     public void grow() {
@@ -264,17 +214,13 @@ protected void fights(int _energy){
         this.setImage(image);
 
 
-
     }
-
 
 
     public void split(){
 
 
-
         angle_split = 360 / num_split;              // In which angle would the child go 
-
 
 
         // Check to see if there if enough energy (size?) to split
@@ -282,11 +228,9 @@ protected void fights(int _energy){
         if (energy >= split_energy && age < lifespan) {
 
 
-
             // If yes, then call the constructor for two new ones and kill the parent
 
             // energy -= split_energy; // Subtract the used up energy needed to split.
-
 
 
             // A for loop running once for each num_Split (child to be made)
@@ -299,18 +243,13 @@ protected void fights(int _energy){
 
                 Mutation.mutate(temp_Splitted);
 
-
                 world.addObject(temp_Splitted, getX(), getY());
-
 
                 temp_Splitted.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
 
 
 
-
-
             }
-
 
 
             die();
@@ -318,49 +257,35 @@ protected void fights(int _energy){
         }
 
 
-
     }
 
 
-
     public void age() {
-
 
 
         age += 1; //Increase age by 1
 
         if (age >= lifespan) {    // If it is less than or equal to its lifespan
 
-             world.addObject(new Carcass(energy), getX(), getY());
+            world.addObject(new Carcass(energy), getX(), getY());
 
             die();                // dies
 
         }
 
 
-
     }
-
 
 
     public void die() {
 
-
         // Remove this object from its lists
-
         lifeforms.remove(this);
-
         // Remove from the world
-
         world.removeObject(this);
-
         return;
 
-
-
     }
-
-
 
 
     public void shift(){
@@ -372,13 +297,10 @@ protected void fights(int _energy){
         if(Greenfoot.getRandomNumber(100)<10){
 
 
-
             turn(Greenfoot.getRandomNumber(90)-45);
 
 
-
         }
-
 
 
         //if at the edge turn away 
@@ -386,33 +308,25 @@ protected void fights(int _energy){
         if(age<lifespan && isAtEdge()==true){
 
 
-
             turn(180);
-
 
 
         }
 
 
-
     }
-
 
 
     public void shift(int action, AbstOrganism target) {
 
 
-
     } //a function the allows the organism to move based on detect command 
-
 
 
     public int detect (int trophic_lvl) {
 
 
-
         return 0;
-
 
 
     }

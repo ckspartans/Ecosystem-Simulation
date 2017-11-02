@@ -11,9 +11,9 @@ import java.util.*;
 public class Parasite extends Carcass
 {
     double consumptionRate = 1;
-    
+
     //double energy = 10;
-        
+
     public Parasite () {
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
         image.setColor(Color.BLACK);        // Sets the color black
@@ -34,7 +34,7 @@ public class Parasite extends Carcass
     public void act() 
     {
         Boolean attached = false;
-        
+
         lifespan = stats [0]; //max limit an organism can be in the world 
         speed = stats [1]; //rate of movement of the organism 
         range = stats [2]; // Int storing detection range
@@ -47,20 +47,20 @@ public class Parasite extends Carcass
             world = (MyWorld) getWorld (); // Store the reference to the current world
 
         }
-        
+
         Carnivore host2 = (Carnivore) getOneIntersectingObject(Carnivore.class);
         Herbivore host1 = (Herbivore) getOneIntersectingObject(Herbivore.class);
-        
+
         if(host1 != null && host1.energy > 0){
             attached = true;
             setLocation(host1.getX(), host1.getY());
             host1.energy-=0.001;
             eat();
         }
-         else{
+        else{
             attached = false;
         }
-         
+
         if(host2 != null && host2.energy > 0 ){
             attached = true;
             setLocation(host2.getX(), host2.getY());
@@ -70,21 +70,18 @@ public class Parasite extends Carcass
         else{
             attached = false;
         }
-        
-        
+
         //age ();     // Increases age by 1 every time the act method executes
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
         split();    // Reproduces when reaches the certain stage
         attack();
     }
+
     public void attack(){
-        
-       
-        
+
         
     }
-
     public void grow() {
         size = (int) (0.02 * energy + 5); 
         GreenfootImage image = new GreenfootImage(size, size); 
@@ -94,7 +91,6 @@ public class Parasite extends Carcass
         image.fillRect(0, 0, size, size);
         this.setImage(image);
     }
-
 
     public void eat(){
         energy += consumptionRate;
@@ -114,20 +110,20 @@ public class Parasite extends Carcass
             die();
         }
     }
-    
+
     public void age() {
         age += 1; 
         if (age >= lifespan && energy != 0) { 
             die();               
         }
     }
-    
+
     public void shift(){
         move(1);
         turn(40);
     }
-    
-      public void die() {
+
+    public void die() {
         lifeforms.remove(this);
         world.removeObject(this);
     }

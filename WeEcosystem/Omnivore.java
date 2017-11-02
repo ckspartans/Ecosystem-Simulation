@@ -12,7 +12,8 @@ public class Omnivore extends Carnivore
     protected int radius = 120; // radius, default using 1
     protected Algae target2 = null; // when it is null, player has no target2
     protected Herbivore target = null; // when it is null, player has no target2
-    
+
+    int size = 1;
     public Omnivore() {
 
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
@@ -73,25 +74,25 @@ public class Omnivore extends Carnivore
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
 
         AI.checkPrey(this);
-        
+
         // If the world reference is not stored:
         if (world == null) {
 
             world = (MyWorld) getWorld (); // Store the reference to the current world
 
         }   
-       
+
         /*
         if(getOneIntersectingObject(Herbivore.class) != null){
-           AbstOrganism.lifeforms.remove(this);
-           world.removeObject(this);     
+        AbstOrganism.lifeforms.remove(this);
+        world.removeObject(this);     
         }
-        */
+         */
 
         if (target2 == null) { // when player has no target2, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
         } else { // else player moves automatically to the target2 
-            AI.hunt(this); // Attacks preys
+          //  AI.hunt(this); // Attacks preys
         }
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
@@ -108,8 +109,8 @@ public class Omnivore extends Carnivore
             target2 = null; // clear the target2 after removing the apple
 
         }
-        
-          Herbivore herbivore = (Herbivore) getOneIntersectingObject(Herbivore.class);
+
+        Herbivore herbivore = (Herbivore) getOneIntersectingObject(Herbivore.class);
 
         if (herbivore != null) {
 
@@ -123,63 +124,38 @@ public class Omnivore extends Carnivore
             target = null; // clear the target after removing the apple
 
         }
-        
-        
+
         if (target == null) { // when player has no target2, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
         } else { // else player moves automatically to the target2 
-            AI.hunt(this); // Attacks preys
+           // AI.hunt(this); // Attacks preys
         }
 
-
-       // age ();     // Increases age by 1 every time the act method executes
-
+        // age ();     // Increases age by 1 every time the act method executes
         eat ();     // Increases energy by 1 every time the act method executes, adds 5 each time they eat other organism
-
         grow ();    // Grow depending on energy they have
-
         shift();    // Randomly moves around
-
         split();    // Reproduces when reaches the certain stage
-
     }
-
     public List<Algae> givesOffList2() {
-
         List<Algae> list = getObjectsInRange(range, Algae.class); // List of organisms around 
-
         return list;
     }
-    
 
     public void grow() {
-
         // Modify the size+10 of the image based on  the current energy
-
         size = (int) (0.02 * energy + 5); //Change in size+10
-
         GreenfootImage image = new GreenfootImage(size+10, size+10); 
-
         image.setColor(Color.BLACK);
-
         image.drawRect(0, 0, size+10, size+10);
-
         image.setColor(Color.WHITE);        // Sets the color green
-
         image.fillRect(0, 0, size+10, size+10);
-
         this.setImage(image);
-
     }
-
     public void split(){
-
         angle_split = 360 / num_split;              // In which angle would the child go 
-
         // Check to see if there if enough energy (size?) to split
-
         if (energy >= split_energy && age < lifespan) {
-
             // If yes, then call the constructor for two new ones and kill the parent
             // energy -= split_energy; // Subtract the used up energy needed to split.
 

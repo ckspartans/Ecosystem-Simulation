@@ -1,13 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
-
 /** Carcass
-
  * A carcass left behind which appears once an organism dies of their age reaching their lifespan, the carcass slowly decompses
-
  * 
-
  * @author Hawke, Mudaser, Parmeet, Shusil, Tim  
  * @version 17/10/2017
 
@@ -16,7 +12,6 @@ import java.util.*;
 public class Carcass extends AbstOrganism
 
 {
-
 
 
     MyWorld world; //reference to the myworld class
@@ -30,65 +25,41 @@ public class Carcass extends AbstOrganism
         leftEnergy = energy;
 
     }
-     public Carcass () {
+
+    public Carcass () {
 
         leftEnergy = energy;
 
     }
-    
 
     
-
-
 
     public void act() 
-
     {
-
         //creat new world if world is not created yet
-
         if(world == null){
-
-
 
             world = (MyWorld) getWorld();
 
-
-
         }    
-
         eat();
-
         grow();
-
         age();
-
     }
-
-
 
     public void eat(){
-
         leftEnergy-=1;
-
     }
 
-
-    
-     public List<AbstOrganism> givesOffList() {
+    public List<AbstOrganism> givesOffList(int rad) {
          
-         
- 
     
-    
-    return null;
-}
+        return null;
+    }
 
-    
 
     public void grow(){
 
-    
 
         size = (int) (0.02 * leftEnergy + 5); //Change in size
 
@@ -104,35 +75,25 @@ public class Carcass extends AbstOrganism
 
         this.setImage(image);
 
-        
 
     }
-
 
 
     public void split(){}
-
     
-
+    protected void fights(int _energy){    // Basically the calculation of attack and defense 
+    
+    }
 
     public void age(){
 
-
-
         if(leftEnergy <= 0){
 
-
-
             die();
-
         }
 
-
-
     }
-
- protected List givesOffListPredator(){ // List of organisms around
-
+    protected List givesOffListPredator(){ // List of organisms around
         return null;
     }
 
@@ -143,10 +104,7 @@ public class Carcass extends AbstOrganism
     }
 
 
-
     public void shift(){}
-
-
 
 
 }   
