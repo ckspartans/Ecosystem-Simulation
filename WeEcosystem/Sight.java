@@ -41,7 +41,6 @@ public class Sight extends Actor
             getWorld().removeObject(this);  // If there is no Parent Organism and some how this actor gets added, it will delete then
 
         }
-
        
     }    
 

@@ -26,6 +26,7 @@ public class Scavenger extends AbstOrganism
     protected Carcass target = null; // when it is null, player has no target
 
     public Scavenger() {
+        trophicLvl = 4;
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
         image.setColor(Color.BLACK);        // Sets the color black
         image.drawRect(0, 0, size+10, size+10);   // Draws oval with the given size+10 on top of transparent image 
@@ -37,11 +38,12 @@ public class Scavenger extends AbstOrganism
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
         energy = 0; //Starts with zero energy
-        stats = new int [] {300, 1, 120, 2, 200, 2}; //traits for Herbivore 
+        stats = new int [] {300, 1, 120, 2, 200, 2}; //traits 
+        Mutation.mutate(this);
     }
 
     public Scavenger (int [] newStats) {
-
+        trophicLvl = 4;
         GreenfootImage image = new GreenfootImage(size+10, size+10); // Creates an empty transparent image with the given size+10
 
         image.setColor(Color.BLACK);        // Sets the color black
@@ -105,7 +107,7 @@ public class Scavenger extends AbstOrganism
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
         split();    // Reproduces when reaches the certain stage
-        //display();
+
     }
 
     protected void checkCarcass() { // Check if there is any algae within the given radius
@@ -121,18 +123,13 @@ public class Scavenger extends AbstOrganism
         }
     }
 
-    public List<AbstOrganism> givesOffList(int rad) {
+    public List<AbstOrganism> givesOffList() {
 
         List<AbstOrganism> list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
 
         return list;
     }
 
-       protected void fights(int _energy){    // Basically the calculation of attack and defense 
-    
-    }
-
-    
     protected void hunt(){
         // getWorld().showText("Im dead", 159,225);
         // double valueX = 0; 
@@ -198,7 +195,9 @@ public class Scavenger extends AbstOrganism
 
                 temp_Splitted.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
 
+
             }
+
             die();
         }
 
@@ -220,19 +219,31 @@ public class Scavenger extends AbstOrganism
 
     public void die() {
 
+
         // Remove this object from its lists
+
         lifeforms.remove(this);
+
         // Remove from the world
+
         world.removeObject(this);
+
 
     }
 
+
     public void shift(){
+
         move(speed); //adjust speed ranging form 2-8 
+
         //randomize turning left and right
+
         if(Greenfoot.getRandomNumber(100)<10){
+
             turn(Greenfoot.getRandomNumber(90)-45);
+
         }
+
         //if at the edge turn away 
         if(age<lifespan && isAtEdge()==true){
 
@@ -242,13 +253,7 @@ public class Scavenger extends AbstOrganism
 
     }
 
-    public void shift(int action, AbstOrganism target) {
-
-    } //a function the allows the organism to move based on detect command 
-
-    public int detect (int trophic_lvl) {
-
-        return 0;
-
+      protected void fights(int _energy){    // Basically the calculation of attack and defense 
+    
     }
 }

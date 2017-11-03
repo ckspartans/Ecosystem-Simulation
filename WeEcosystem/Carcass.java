@@ -13,26 +13,15 @@ public class Carcass extends AbstOrganism
 
 {
 
-
-    MyWorld world; //reference to the myworld class
-
-    double leftEnergy;
-
-    double value;
+    private double leftEnergy;
 
     public Carcass (double energy) {
-
-        leftEnergy = energy;
-
+        leftEnergy = energy; //energy of the living organism is now
     }
 
     public Carcass () {
-
-        leftEnergy = energy;
-
+        leftEnergy = energy; //energy of the living organism is now
     }
-
-    
 
     public void act() 
     {
@@ -48,18 +37,14 @@ public class Carcass extends AbstOrganism
     }
 
     public void eat(){
-        leftEnergy-=1;
+        //not in use
     }
 
-    public List<AbstOrganism> givesOffList(int rad) {
-         
-    
-        return null;
+    public List<AbstOrganism> givesOffList() {
+        return null;//not in use
     }
-
 
     public void grow(){
-
 
         size = (int) (0.02 * leftEnergy + 5); //Change in size
 
@@ -69,30 +54,30 @@ public class Carcass extends AbstOrganism
 
         image.drawOval(0, 0, size, size);
 
-        image.setColor(Color.BLUE);        // Sets the color green
+        image.setColor(Color.YELLOW);
 
         image.fillOval(0, 0, size, size);
 
         this.setImage(image);
 
-
     }
 
-
-    public void split(){}
-    
-    protected void fights(int _energy){    // Basically the calculation of attack and defense 
-    
+    public void split(){
+        //not in use
     }
 
     public void age(){
-
+        leftEnergy-=1; //energy reduces as the mass rotts 
+        //if not energy is left remove body 
         if(leftEnergy <= 0){
-
             die();
         }
-
     }
+
+    protected void fights(int _energy){    // Basically the calculation of attack and defense 
+
+     }
+
     protected List givesOffListPredator(){ // List of organisms around
         return null;
     }
@@ -103,8 +88,8 @@ public class Carcass extends AbstOrganism
 
     }
 
-
-    public void shift(){}
-
+    public void shift(){
+        //not in use
+    }
 
 }   
