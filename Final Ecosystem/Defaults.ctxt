@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=Defaults
+comment0.text=\r\n\ Handles\ the\ smaller\ vectors\ Calc.\r\n\ \r\n\ @author\ (Shusil)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=actor1\ actor2
+comment1.target=double\ calcDistance(AbstOrganism,\ AbstOrganism)
+numComments=2
