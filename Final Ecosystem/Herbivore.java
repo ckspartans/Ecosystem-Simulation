@@ -24,7 +24,7 @@ public class Herbivore extends AbstOrganism
      */
 
     // Base Constructor
-   // protected Algae target = null; // when it is null, player has no target
+    // protected Algae target = null; // when it is null, player has no target
     //private boolean hungry = false;
     private int killCount = 0;
     private int tempTimer = 0;
@@ -47,7 +47,7 @@ public class Herbivore extends AbstOrganism
 
         this.range = range; // Range equals random number that is set during reproduction, how far the detection radius is for the organism
         Mutation.mutate(this);
-        
+
         attack = 3;
         defense = 1;    // Defending armour level 2
     }
@@ -88,20 +88,20 @@ public class Herbivore extends AbstOrganism
 
         }   
 
-       // if (target == null && hungry == true) { // when player has no target, using keyboard controller
+        // if (target == null && hungry == true) { // when player has no target, using keyboard controller
         //    AI.checkPrey(this); // after each movement, check whether the food is in sight
-         //   AI.checkPredator(this);
-       // } else if (target != null && hungry == true) { // else player moves automatically to the target 
-           // AI.hunt(this); // Attacks preys
-          //  AI.flee(this);
-    //    }
+        //   AI.checkPredator(this);
+        // } else if (target != null && hungry == true) { // else player moves automatically to the target 
+        // AI.hunt(this); // Attacks preys
+        //  AI.flee(this);
+        //    }
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
         if (algae != null) {
             ((MyWorld) getWorld()).foodEaten ++;          // Increases foodeaten, a variable in My World
-         //   energy += (algae.energy)/2; //energy gained after eating
+            energy += (algae.energy)/2; //energy gained after eating
             ((MyWorld) getWorld()).removeObject(algae);      // Removes Algae object
-          //  target = null; // clear the target after removing the apple
+            //  target = null; // clear the target after removing the apple
 
         }
 
@@ -109,13 +109,11 @@ public class Herbivore extends AbstOrganism
         eat ();     // Increases energy by 1 every time the act method executes, adds 5 each time they eat other organism
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
-        //split();    // Reproduces when reaches the certain stage
+        split();    // Reproduces when reaches the certain stage
         hunger();    
     }
-    
 
     public void hunger(){
-
         if(killCount >= 5){
             hungry = false;
         }
@@ -129,7 +127,7 @@ public class Herbivore extends AbstOrganism
                 killCount = 0;
             }
         }
-        if(energy < 0){
+        if(energy <= 0){
             die();
         }
     }
@@ -138,16 +136,16 @@ public class Herbivore extends AbstOrganism
         List<Algae> list = getObjectsInRange(range, Algae.class); // List of Algae around 
         return list;
     }
-    
-       public List < AbstOrganism > givesOffList1() {
-         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+
+    public List < AbstOrganism > givesOffList1() {
+        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-        }
-        
-         public List < AbstOrganism > givesOffList2() {
-         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+    }
+
+    public List < AbstOrganism > givesOffList2() {
+        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-        }
+    }
 
     protected List givesOffListPredator(){ // List of predator around
         List<Carnivore> list = getObjectsInRange(range, Carnivore.class); // List of Carnvivores around 
@@ -164,18 +162,23 @@ public class Herbivore extends AbstOrganism
             die();
         }
 
-     }
+    }
 
     public void grow() {
         // Modify the size+10 of the image based on  the current energy
-        size = (int) (0.02 * energy + 5); //Change in size+10
-        GreenfootImage image = new GreenfootImage(size+10, size+10); 
-        image.setColor(Color.BLACK);
-        image.drawRect(0, 0, size+10, size+10);
-        image.setColor(Color.GREEN);        // Sets the color green
-        image.fillRect(0, 0, size+10, size+10);
-        this.setImage(image);
+        size = (int) (0.02 * energy + 5); //Change in size
 
+        GreenfootImage image = new GreenfootImage(size+5, size+5); 
+
+        image.setColor(Color.BLACK);
+
+        image.drawRect(0, 0, size, size);
+
+        image.setColor(Color.GREEN);
+
+        image.fillRect(0, 0, size, size);
+
+        this.setImage(image);
     }
 
     public void split(){

@@ -42,6 +42,12 @@ public class Button extends AbstUI
     }
 
     public void act(){//if mouse clicked
+        
+         if (world == null) {
+
+            world = (MyWorld) getWorld(); // Store the reference to the current world
+
+        }
         MouseInfo mouse = Greenfoot.getMouseInfo();        
         if (Greenfoot.mousePressed(this)){//when mouse clicks on button
             mouseDown = true;
@@ -57,12 +63,21 @@ public class Button extends AbstUI
             }
             else if (trophic_Level == 4) {
                 
-                if(world.auto == false){
-                    world.auto = true;
-                }
-                else if(world.auto == true){
-                    world.auto = false;
-                }
+                if (world != null) {
+
+               if(world.auto == false){
+
+                   world.auto = true;
+
+               }
+
+               else if(world.auto == true){
+
+                   world.auto = false;
+
+               }
+
+           }
                 
             }
 

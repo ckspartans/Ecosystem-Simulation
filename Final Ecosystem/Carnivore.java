@@ -33,7 +33,7 @@ public class Carnivore extends AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 100; 
+        energy = 50; 
         stats = new int [] {300, 2, 120, 2, 200, 2}; //traits for Carnivore 
         Mutation.mutate(this);
         attack = 5;     // Attack level is 5
@@ -53,7 +53,7 @@ public class Carnivore extends AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 500; //Starts with zero energy
+        energy = 50; //Starts with zero energy
         stats = newStats; //traits for Herbivore 
     }
 
@@ -86,7 +86,7 @@ public class Carnivore extends AbstOrganism
 
             world.foodEaten ++;          // Increases foodeaten, a variable in My World
             killCount ++;
-         //   energy+= (herbivore.energy)/4; //energy gained after eating
+            energy+= (herbivore.energy)/4; //energy gained after eating
 
             AbstOrganism.lifeforms.remove(herbivore);
             world.removeObject(herbivore);      // Removes Algae object
@@ -101,7 +101,7 @@ public class Carnivore extends AbstOrganism
 
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
-        //split();    // Reproduces when reaches the certain stage
+        split();    // Reproduces when reaches the certain stage
 
         hunger();
     }

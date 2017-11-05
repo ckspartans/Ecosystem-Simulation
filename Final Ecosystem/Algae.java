@@ -92,16 +92,16 @@ public class Algae extends AbstOrganism
         return list;
     }
 
-     public List < AbstOrganism > givesOffList1() {
-         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+    public List < AbstOrganism > givesOffList1() {
+        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-        }
-        
-         public List < AbstOrganism > givesOffList2() {
-         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+    }
+
+    public List < AbstOrganism > givesOffList2() {
+        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-        }
-    
+    }
+
     public void eat() {
         // Increases the energy amount by absorbing sunlight 
         energy += 1;
@@ -109,12 +109,18 @@ public class Algae extends AbstOrganism
 
     public void grow() {
         // Modify the size of the image based on  the current energy
-        size = (int)(0.02 * energy + 5); //Change in size
-        GreenfootImage image = new GreenfootImage(size, size);
+        size = (int) (0.02 * energy + 5); //Change in size
+
+        GreenfootImage image = new GreenfootImage(size+5, size+5); 
+
         image.setColor(Color.BLACK);
+
         image.drawOval(0, 0, size, size);
-        image.setColor(Color.GREEN); // Sets the color green
+
+        image.setColor(Color.GREEN);
+
         image.fillOval(0, 0, size, size);
+
         this.setImage(image);
     }
 
@@ -136,8 +142,8 @@ public class Algae extends AbstOrganism
             die();
         }
     }
-    
-      protected void fights(int _energy){    // Basically the calculation of attack and defense 
+
+    protected void fights(int _energy){    // Basically the calculation of attack and defense 
         energy += _energy;
         if(energy < 0){
             die();

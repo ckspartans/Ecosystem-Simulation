@@ -14,7 +14,7 @@ public class Scavenger extends AbstOrganism
 
 {
 
-    private int size = 1; // Starting size+10 of an organism
+
 
     /**
      * Act - do whatever the Algae wants to do. This method is called whenever
@@ -130,15 +130,16 @@ public class Scavenger extends AbstOrganism
         return list;
     }
 
-       public List < AbstOrganism > givesOffList1() {
-         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+    public List < AbstOrganism > givesOffList1() {
+        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-        }
-        
-         public List < AbstOrganism > givesOffList2() {
-         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+    }
+
+    public List < AbstOrganism > givesOffList2() {
+        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-        }
+    }
+
     protected void hunt(){
         // getWorld().showText("Im dead", 159,225);
         // double valueX = 0; 
@@ -171,17 +172,17 @@ public class Scavenger extends AbstOrganism
 
         // Modify the size+10 of the image based on  the current energy
 
-        size = (int) (0.02 * energy + 5); //Change in size+10
+       size = (int) (0.02 * energy + 5); //Change in size
 
-        GreenfootImage image = new GreenfootImage(size+10, size+10); 
+        GreenfootImage image = new GreenfootImage(size+5, size+5); 
 
         image.setColor(Color.BLACK);
 
-        image.drawRect(0, 0, size+10, size+10);
+        image.drawRect(0, 0, size, size);
 
-        image.setColor(Color.YELLOW);        // Sets the color green
+        image.setColor(Color.YELLOW);
 
-        image.fillRect(0, 0, size+10, size+10);
+        image.fillRect(0, 0, size, size);
 
         this.setImage(image);
 
@@ -204,9 +205,7 @@ public class Scavenger extends AbstOrganism
 
                 temp_Splitted.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
 
-
             }
-
             die();
         }
 
@@ -228,31 +227,19 @@ public class Scavenger extends AbstOrganism
 
     public void die() {
 
-
         // Remove this object from its lists
-
         lifeforms.remove(this);
-
         // Remove from the world
-
         world.removeObject(this);
-
 
     }
 
-
     public void shift(){
-
         move(speed); //adjust speed ranging form 2-8 
-
         //randomize turning left and right
-
         if(Greenfoot.getRandomNumber(100)<10){
-
             turn(Greenfoot.getRandomNumber(90)-45);
-
         }
-
         //if at the edge turn away 
         if(age<lifespan && isAtEdge()==true){
 
@@ -262,7 +249,7 @@ public class Scavenger extends AbstOrganism
 
     }
 
-      protected void fights(int _energy){    // Basically the calculation of attack and defense 
-    
+    protected void fights(int _energy){    // Basically the calculation of attack and defense 
+
     }
 }
