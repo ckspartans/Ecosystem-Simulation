@@ -98,7 +98,7 @@ public class Herbivore extends AbstOrganism
           //  AI.flee(this);
     //    }
     
-        world.showText("kill Count" + killCount, 100,500);
+
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
         if (algae != null) {
@@ -118,9 +118,12 @@ public class Herbivore extends AbstOrganism
     
 
     public void hunger(){
-
+        
+        
+        
         if(killCount >= 5){
             hungry = false;
+            
         }
         else{
             hungry = true;
@@ -161,7 +164,7 @@ public class Herbivore extends AbstOrganism
 
     }
 
-     protected void fights(int _energy, AbstOrganism hunter){    // Basically the calculation of attack and defense 
+    protected void fights(int _energy, AbstOrganism hunter){    // Basically the calculation of attack and defense 
      
         energy += _energy;
         if(energy < 0){

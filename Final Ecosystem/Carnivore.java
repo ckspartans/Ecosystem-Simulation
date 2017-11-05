@@ -132,7 +132,7 @@ public class Carnivore extends AbstOrganism
   
     
     public void hunger(){
-        say(""+killCount);
+
         if(killCount >= 5){
             hungry = false;
         }

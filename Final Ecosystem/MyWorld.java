@@ -52,7 +52,7 @@ public class MyWorld extends World
 
         if(auto == true){
             if(algTotal <= 10){
-                for (int i = 0; i < 30; i ++) {
+                for (int i = 0; i < 50; i ++) {
                     addObject(new Algae(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(600));
                 }
             }

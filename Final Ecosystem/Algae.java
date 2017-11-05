@@ -36,7 +36,7 @@ public class Algae extends AbstOrganism
         prey = new ArrayList < AbstOrganism > (); //list of all that the types of organism can feed on
         predators = new ArrayList < AbstOrganism > (); //list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 10; //Starts with this energy
+        energy = 100; //Starts with this energy
         stats = new int[] {300,1,1,2,200,2, 0 , 1};
         Mutation.mutate(this);
         attack = 0;
@@ -57,7 +57,7 @@ public class Algae extends AbstOrganism
         prey = new ArrayList < AbstOrganism > (); //list of all that the types of organism can feed on
         predators = new ArrayList < AbstOrganism > (); //list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 10; //Starts with zero energy
+        energy = 100; //Starts with zero energy
         stats = newStats; //traits for algae 
     }
 
@@ -105,7 +105,7 @@ public class Algae extends AbstOrganism
     
     public void eat() {
         // Increases the energy amount by absorbing sunlight 
-        energy += 1;
+        energy += 2;
     }
 
     public void grow() {
@@ -138,12 +138,14 @@ public class Algae extends AbstOrganism
         }
     }
     
-      protected void fights(int _energy,  AbstOrganism hunter){    // Basically the calculation of attack and defense 
+    protected void fights(int _energy, AbstOrganism hunter){    // Basically the calculation of attack and defense 
+     
         energy += _energy;
-        if(energy < 0){
+        if(energy <= 0){
+            hunter.killCount++;
+       
             die();
         }
-
     }
 
     public void age() {
