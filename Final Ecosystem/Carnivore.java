@@ -33,8 +33,8 @@ public class Carnivore extends AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 50; 
-        stats = new int [] {300, 2, 120, 2, 200, 2}; //traits for Carnivore 
+        energy = 100; 
+        stats = new int [] {300, 2, 120, 2, 200, 2, 5, 2}; //traits for Carnivore 
         Mutation.mutate(this);
         attack = 5;     // Attack level is 5
         defense = 2 ;        // There is no one to attack Carnivore right now
@@ -53,7 +53,7 @@ public class Carnivore extends AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 50; //Starts with zero energy
+        energy = 500; //Starts with zero energy
         stats = newStats; //traits for Herbivore 
     }
 
@@ -65,7 +65,9 @@ public class Carnivore extends AbstOrganism
         num_split = stats [3]; //number of offspring an organism can produce
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
-
+        attack = stats [6];
+        defense = stats [7];
+        
         // If the world reference is not stored:
         if (world == null) {
 
@@ -85,13 +87,7 @@ public class Carnivore extends AbstOrganism
         if (herbivore != null) {
 
             world.foodEaten ++;          // Increases foodeaten, a variable in My World
-            killCount ++;
-            energy+= (herbivore.energy)/4; //energy gained after eating
-
-            AbstOrganism.lifeforms.remove(herbivore);
-            world.removeObject(herbivore);      // Removes Algae object
-
-           // target = null; // clear the target after removing the apple
+            //AbstOrganism.lifeforms.remove(herbivore);
 
         }
 
@@ -142,7 +138,7 @@ public class Carnivore extends AbstOrganism
         }
         if(hungry == false){
             tempTimer ++;
-            if(tempTimer >= 500){
+            if(tempTimer >= 300){
                 tempTimer = 0;
                 killCount = 0;
             }

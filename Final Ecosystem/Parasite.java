@@ -28,7 +28,7 @@ public class Parasite extends Carcass
         age = 0; // An int that increments each time act runs to store the age
         energy = 10; 
 
-        stats = new int [] {300, 1, 120, 2, 200, 2, 1};
+        stats = new int [] {300, 1, 120, 2, 200, 2, 1, 0};
 
     }
 
@@ -43,6 +43,7 @@ public class Parasite extends Carcass
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
         consumptionRate = stats [6];
+        defense = stats [7];
         
         if (world == null) {
 
@@ -73,7 +74,7 @@ public class Parasite extends Carcass
             attached = false;
         }
        
-        //age ();     // Increases age by 1 every time the act method executes
+        age ();     // Increases age by 1 every time the act method executes
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
         split();  // Reproduces when reaches the certain stage

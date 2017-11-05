@@ -42,9 +42,9 @@ public class Omnivore extends Carnivore
         
         int attack = 7;
         
-        int defense = 0;
+        int defense = 1;
 
-        stats = new int [] {300, 2, 120, 2, 200, 2}; //traits for Herbivore 
+        stats = new int [] {300, 2, 120, 2, 200, 2, 7, 1}; //traits for Herbivore 
 
         Mutation.mutate(this);
     }
@@ -79,6 +79,8 @@ public class Omnivore extends Carnivore
         split_energy = stats [4]; //set energy needed to perform a split
 
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
+        attack = stats [6];
+        defense = stats [7];
 
         // If the world reference is not stored:
         if (world == null) {
@@ -87,17 +89,9 @@ public class Omnivore extends Carnivore
 
         }   
         
-       // if (target == null) { // when player has no target2, using keyboard controller
-            AI.checkPrey(this); // after each movement, check whether the food is in sight
-       // } else { // else player moves automatically to the target2 
-          //  AI.hunt(this); // Attacks preys
-       // }
-        
-     //   if (target2 == null) { // when player has no target2, using keyboard controller
-            AI.checkPrey(this); // after each movement, check whether the food is in sight
-       // } else { // else player moves automatically to the target2 
-            //AI.hunt(this); // Attacks preys
-        //}
+
+            AI.checkOmnivorePrey(this); // after each movement, check whether the food is in sight
+
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
 
@@ -105,9 +99,9 @@ public class Omnivore extends Carnivore
 
             world.foodEaten ++;          // Increases foodeaten, a variable in My World
 
-            energy += (algae.energy)/2; //energy gained after eating
+            //energy += (algae.energy)/2; //energy gained after eating
 
-            AbstOrganism.lifeforms.remove(algae);
+            //AbstOrganism.lifeforms.remove(algae);
             world.removeObject(algae);      // Removes Algae object
 
           //  target2 = null; // clear the target2 after removing the apple
@@ -120,10 +114,10 @@ public class Omnivore extends Carnivore
 
             world.foodEaten ++;          // Increases foodeaten, a variable in My World
 
-            energy+= (herbivore.energy)/2; //energy gained after eating
+            //energy+= (herbivore.energy)/2; //energy gained after eating
 
-            AbstOrganism.lifeforms.remove(herbivore);
-            world.removeObject(herbivore);      // Removes Algae object
+            //AbstOrganism.lifeforms.remove(herbivore);
+            //world.removeObject(herbivore);      // Removes Algae object
 
         //    target = null; // clear the target after removing the apple
 
@@ -134,16 +128,23 @@ public class Omnivore extends Carnivore
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
         split();    // Reproduces when reaches the certain stage
+        hunger();   // Limits the amount of prey the omnivore can eat in a period of time
     }
 
     
-       public List<Herbivore> givesOffList() {
+       public List<Herbivore> givesOffListH() {
 
         List<Herbivore> list = getObjectsInRange(range, Herbivore.class); // List of organisms around 
         return list;
 
     }
         
+    public List<Algae> givesOffListA() {
+
+        List<Algae> list = getObjectsInRange(range, Algae.class); // List of organisms around 
+        return list;
+
+    }
       
     
      public void age() {

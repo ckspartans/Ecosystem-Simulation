@@ -43,11 +43,12 @@ public class Button extends AbstUI
 
     public void act(){//if mouse clicked
         
-         if (world == null) {
-
-            world = (MyWorld) getWorld(); // Store the reference to the current world
-
+        if (world == null) {
+        
+            world = (MyWorld) getWorld (); // Store the reference to the current world
+            
         }
+        
         MouseInfo mouse = Greenfoot.getMouseInfo();        
         if (Greenfoot.mousePressed(this)){//when mouse clicks on button
             mouseDown = true;
@@ -62,23 +63,16 @@ public class Button extends AbstUI
                 getWorld().addObject(new Carnivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
             }
             else if (trophic_Level == 4) {
-                
                 if (world != null) {
+                    
+                    if(world.auto == false){
+                        world.auto = true;
+                    }
+                    else if(world.auto == true){
+                        world.auto = false;
+                    }
 
-               if(world.auto == false){
-
-                   world.auto = true;
-
-               }
-
-               else if(world.auto == true){
-
-                   world.auto = false;
-
-               }
-
-           }
-                
+                }
             }
 
         }

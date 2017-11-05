@@ -37,7 +37,7 @@ public class Algae extends AbstOrganism
         predators = new ArrayList < AbstOrganism > (); //list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
         energy = 10; //Starts with this energy
-        stats = new int[] {300,1,1,2,200,2};
+        stats = new int[] {300,1,1,2,200,2, 0 , 1};
         Mutation.mutate(this);
         attack = 0;
 
@@ -69,7 +69,8 @@ public class Algae extends AbstOrganism
         num_split = stats[3]; //number of offspring an organism can produce
         split_energy = stats[4]; //set energy needed to perform a split
         mutation_rate = stats[5]; // An int which determines how many random gene stats can be changed
-
+        attack = stats [6];
+        defense = stats [7];
         // If the world reference is not stored:
         if (world == null) {
 
@@ -92,16 +93,16 @@ public class Algae extends AbstOrganism
         return list;
     }
 
-    public List < AbstOrganism > givesOffList1() {
-        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+     public List < AbstOrganism > givesOffList1() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-    }
-
-    public List < AbstOrganism > givesOffList2() {
-        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        }
+        
+         public List < AbstOrganism > givesOffList2() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-    }
-
+        }
+    
     public void eat() {
         // Increases the energy amount by absorbing sunlight 
         energy += 1;
@@ -109,18 +110,12 @@ public class Algae extends AbstOrganism
 
     public void grow() {
         // Modify the size of the image based on  the current energy
-        size = (int) (0.02 * energy + 5); //Change in size
-
-        GreenfootImage image = new GreenfootImage(size+5, size+5); 
-
+        size = (int)(0.02 * energy + 5); //Change in size
+        GreenfootImage image = new GreenfootImage(size, size);
         image.setColor(Color.BLACK);
-
         image.drawOval(0, 0, size, size);
-
-        image.setColor(Color.GREEN);
-
+        image.setColor(Color.GREEN); // Sets the color green
         image.fillOval(0, 0, size, size);
-
         this.setImage(image);
     }
 
@@ -142,8 +137,8 @@ public class Algae extends AbstOrganism
             die();
         }
     }
-
-    protected void fights(int _energy){    // Basically the calculation of attack and defense 
+    
+      protected void fights(int _energy){    // Basically the calculation of attack and defense 
         energy += _energy;
         if(energy < 0){
             die();

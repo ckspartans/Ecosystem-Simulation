@@ -20,7 +20,6 @@ public class MyWorld extends World
     int herbTotal;
     int carnTotal;
     int scavTotal;
-    
     /** MyWorld
      * Constructor for objects of class MyWorld.
      * 
@@ -113,8 +112,8 @@ public class MyWorld extends World
         showText("Scavenger",750,300);
 
         showText("Carnivore",750,400);
+        showText("Auto: " + auto,750,500);
         
-         showText("Auto "+auto,750,500);
     }
 
     private void makeButton(int _trophic_Level)//create algae button

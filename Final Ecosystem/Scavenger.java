@@ -14,7 +14,7 @@ public class Scavenger extends AbstOrganism
 
 {
 
-
+    private int size = 1; // Starting size+10 of an organism
 
     /**
      * Act - do whatever the Algae wants to do. This method is called whenever
@@ -38,7 +38,7 @@ public class Scavenger extends AbstOrganism
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
         energy = 0; //Starts with zero energy
-        stats = new int [] {300, 1, 120, 2, 200, 2}; //traits 
+        stats = new int [] {300, 1, 120, 2, 200, 2, 3, 3}; //traits 
         Mutation.mutate(this);
     }
 
@@ -78,6 +78,8 @@ public class Scavenger extends AbstOrganism
         num_split = stats [3]; //number of offspring an organism can produce
         split_energy = stats [4]; //set energy needed to perform a split
         mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
+        attack = stats [6];
+        defense = stats [7];
 
         checkCarcass();
         // If the world reference is not stored:
@@ -96,7 +98,7 @@ public class Scavenger extends AbstOrganism
         Carcass carcass = (Carcass) getOneIntersectingObject(Carcass.class);
         if (carcass != null) {
             ((MyWorld) getWorld()).foodEaten ++;          // Increases foodeaten, a variable in My World
-            energy+= (carcass.energy)/4; //energy gained after eating
+            energy+= (carcass.energy); //energy gained after eating
             ((MyWorld) getWorld()).removeObject(carcass);      // Removes Algae object
             target = null; // clear the target after removing the apple
 
@@ -130,16 +132,15 @@ public class Scavenger extends AbstOrganism
         return list;
     }
 
-    public List < AbstOrganism > givesOffList1() {
-        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+       public List < AbstOrganism > givesOffList1() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-    }
-
-    public List < AbstOrganism > givesOffList2() {
-        List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        }
+        
+         public List < AbstOrganism > givesOffList2() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
         return list;
-    }
-
+        }
     protected void hunt(){
         // getWorld().showText("Im dead", 159,225);
         // double valueX = 0; 
@@ -172,17 +173,17 @@ public class Scavenger extends AbstOrganism
 
         // Modify the size+10 of the image based on  the current energy
 
-       size = (int) (0.02 * energy + 5); //Change in size
+        size = (int) (0.02 * energy + 5); //Change in size+10
 
-        GreenfootImage image = new GreenfootImage(size+5, size+5); 
+        GreenfootImage image = new GreenfootImage(size+10, size+10); 
 
         image.setColor(Color.BLACK);
 
-        image.drawRect(0, 0, size, size);
+        image.drawRect(0, 0, size+10, size+10);
 
-        image.setColor(Color.YELLOW);
+        image.setColor(Color.YELLOW);        // Sets the color green
 
-        image.fillRect(0, 0, size, size);
+        image.fillRect(0, 0, size+10, size+10);
 
         this.setImage(image);
 
@@ -205,7 +206,9 @@ public class Scavenger extends AbstOrganism
 
                 temp_Splitted.turn ((180 - angle_split * i) + (Greenfoot.getRandomNumber(angle_split) - angle_split / 2));
 
+
             }
+
             die();
         }
 
@@ -227,19 +230,31 @@ public class Scavenger extends AbstOrganism
 
     public void die() {
 
+
         // Remove this object from its lists
+
         lifeforms.remove(this);
+
         // Remove from the world
+
         world.removeObject(this);
+
 
     }
 
+
     public void shift(){
+
         move(speed); //adjust speed ranging form 2-8 
+
         //randomize turning left and right
+
         if(Greenfoot.getRandomNumber(100)<10){
+
             turn(Greenfoot.getRandomNumber(90)-45);
+
         }
+
         //if at the edge turn away 
         if(age<lifespan && isAtEdge()==true){
 
@@ -249,7 +264,7 @@ public class Scavenger extends AbstOrganism
 
     }
 
-    protected void fights(int _energy){    // Basically the calculation of attack and defense 
-
+      protected void fights(int _energy){    // Basically the calculation of attack and defense 
+    
     }
 }
