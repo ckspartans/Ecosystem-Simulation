@@ -16,13 +16,11 @@ public class AI
     public static void checkPrey(AbstOrganism Org2){
         AbstOrganism target = null;         // This is the variable that stores target 
 
-      
-      
             if(!Org2.givesOffList().isEmpty()){   // Checks the organisms if any within that radius
 
                      target = (AbstOrganism) getTheCloset(Org2, Org2.givesOffList() ); // always set the first one in the list as the target
 
-                     target = (AbstOrganism) getTheCloset(Org2, Org2.givesOffList() );
+                    // target = (AbstOrganism) getTheCloset(Org2, Org2.givesOffList() );
                 if(target!=null && Org2.hungry == true){ // If there are preys in range
 
                     if(Defaults.calcDistance(Org2, target)<10){ // Attack only gets called when their distance is less than 10
@@ -31,15 +29,6 @@ public class AI
 
                     }
                     
-                    
-                    
-                    
-                   
-                    
-                    
-                   
-                    
-
                     hunt(Org2, target); //Kills
 
                     System.out.println("Range before: " + Org2.range);  // For testing range

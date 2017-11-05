@@ -89,8 +89,8 @@ public class Herbivore extends AbstOrganism
         }   
 
        // if (target == null && hungry == true) { // when player has no target, using keyboard controller
-            AI.checkPrey(this); // after each movement, check whether the food is in sight
-            AI.checkPredator(this);
+        //    AI.checkPrey(this); // after each movement, check whether the food is in sight
+         //   AI.checkPredator(this);
        // } else if (target != null && hungry == true) { // else player moves automatically to the target 
            // AI.hunt(this); // Attacks preys
           //  AI.flee(this);
@@ -110,7 +110,9 @@ public class Herbivore extends AbstOrganism
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
         //split();    // Reproduces when reaches the certain stage
+hunger();    
     }
+    
 
     public void hunger(){
 
