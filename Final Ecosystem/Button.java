@@ -36,44 +36,38 @@ public class Button extends AbstUI
         mouseDown = false;
 
         select = 0;
-        
+
         this.trophic_Level = _trophic_Level;
 
     }
 
-    
-
     public void act(){//if mouse clicked
-
-       MouseInfo mouse = Greenfoot.getMouseInfo();        
-
-       if (Greenfoot.mousePressed(this)){//when mouse clicks on button
-
-           mouseDown = true;
-
-           getWorld().showText("Selected", 900,240);
-           
-           if (trophic_Level == 0) {
-           
-               getWorld().addObject(new Algae(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
-
-        } else if (trophic_Level == 1) {
-           
-               getWorld().addObject(new Herbivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
-
-        } else if (trophic_Level == 2) {
-           
-               getWorld().addObject(new Scavenger(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
-
-        } else if (trophic_Level == 3) {
-           
-               getWorld().addObject(new Carnivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
+        MouseInfo mouse = Greenfoot.getMouseInfo();        
+        if (Greenfoot.mousePressed(this)){//when mouse clicks on button
+            mouseDown = true;
+            getWorld().showText("Selected", 900,240);
+            if (trophic_Level == 0) {
+                getWorld().addObject(new Algae(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
+            } else if (trophic_Level == 1) {
+                getWorld().addObject(new Herbivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
+            } else if (trophic_Level == 2) {
+                getWorld().addObject(new Scavenger(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
+            } else if (trophic_Level == 3) {
+                getWorld().addObject(new Carnivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));//add an algae every time button is clicked
+            }
+            else if (trophic_Level == 4) {
+                
+                if(world.auto == false){
+                    world.auto = true;
+                }
+                else if(world.auto == true){
+                    world.auto = false;
+                }
+                
+            }
 
         }
-    
+
     }
-
-        }
-
 
 }

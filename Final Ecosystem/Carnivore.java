@@ -86,7 +86,7 @@ public class Carnivore extends AbstOrganism
 
             world.foodEaten ++;          // Increases foodeaten, a variable in My World
             killCount ++;
-            energy+= (herbivore.energy)/4; //energy gained after eating
+         //   energy+= (herbivore.energy)/4; //energy gained after eating
 
             AbstOrganism.lifeforms.remove(herbivore);
             world.removeObject(herbivore);      // Removes Algae object

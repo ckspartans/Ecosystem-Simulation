@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Sat Nov 04 22:24:56 EDT 2017
+#Sat Nov 04 23:16:53 EDT 2017
 target16.name=Sight
 class.MyWorld.image=fingerprint.jpg
 dependency35.to=Scavenger
@@ -46,7 +46,7 @@ target12.y=0
 target12.x=0
 dependency55.type=UsesDependency
 dependency52.from=Omnivore
-editor.fx.0.height=739
+editor.fx.0.height=0
 project.charset=UTF-8
 dependency40.to=AI
 target12.typeParameters=
@@ -200,12 +200,12 @@ dependency26.from=Carnivore
 target4.type=AbstractTarget
 dependency59.to=Mutation
 dependency33.from=Button
-editor.fx.0.y=-4
+editor.fx.0.y=0
 dependency36.type=UsesDependency
-editor.fx.0.x=275
+editor.fx.0.x=0
 dependency11.to=Omnivore
 target6.height=50
-editor.fx.0.width=816
+editor.fx.0.width=0
 dependency32.to=MyWorld
 class.Defaults.superclass=
 dependency5.type=UsesDependency

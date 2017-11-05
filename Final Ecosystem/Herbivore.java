@@ -99,7 +99,7 @@ public class Herbivore extends AbstOrganism
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
         if (algae != null) {
             ((MyWorld) getWorld()).foodEaten ++;          // Increases foodeaten, a variable in My World
-            energy += (algae.energy)/2; //energy gained after eating
+         //   energy += (algae.energy)/2; //energy gained after eating
             ((MyWorld) getWorld()).removeObject(algae);      // Removes Algae object
           //  target = null; // clear the target after removing the apple
 
@@ -110,7 +110,7 @@ public class Herbivore extends AbstOrganism
         grow ();    // Grow depending on energy they have
         shift();    // Randomly moves around
         //split();    // Reproduces when reaches the certain stage
-hunger();    
+        hunger();    
     }
     
 
@@ -129,7 +129,7 @@ hunger();
                 killCount = 0;
             }
         }
-        if(energy <= 0){
+        if(energy < 0){
             die();
         }
     }

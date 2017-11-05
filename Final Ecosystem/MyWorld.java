@@ -14,6 +14,7 @@ public class MyWorld extends World
     int foodEaten = 0;
     StartScreen start;
     Button button;
+    public boolean auto = true;
     public static int timer = 0;
     int algTotal;
     int herbTotal;
@@ -33,11 +34,12 @@ public class MyWorld extends World
 
         setPaintOrder (Button.class, Parasite.class, Carnivore.class, Scavenger.class, Herbivore.class, Algae.class);
         Greenfoot.setWorld(start);
-        defult();
+        
         makeButton(0);//draw Algae button
         makeButton(1); // Herbivore button
         makeButton(2); // Scavenger button
         makeButton(3);// Carnivore button
+        makeButton(4);
     }
 
     public void act() 
@@ -47,36 +49,36 @@ public class MyWorld extends World
 
         display(); // Draws the various texts on the screen
         timer ++; // Increments the shared timer, used in some act methods to improve program efficiency
-        if(algTotal <= 6){
 
-            for (int i = 0; i < 30; i ++) {
-                addObject(new Algae(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
+        if(auto == true){
+            if(algTotal <= 10){
+                for (int i = 0; i < 30; i ++) {
+                    addObject(new Algae(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(600));
+                }
             }
-        }
-        for (int i = 0; i < 6; i ++) {
-           // addObject(new Parasite(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-        }
-        if(herbTotal <= 0){
-            for (int i = 0; i < 8; i ++) {
-                addObject(new Herbivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
+            if(herbTotal <= 1){
+                for (int i = 0; i < 8; i ++) {
+                    addObject(new Herbivore(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(600));
+                }
             }
-        }
-        if(carnTotal <= 2){
-            for (int i = 0; i < 4; i ++) {
-                addObject(new Carnivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
+            if(carnTotal <= 2){
+                for (int i = 0; i < 4; i ++) {
+                    addObject(new Carnivore(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(600));
+                }
+                for (int i = 0; i < 3; i ++) {
+                    addObject(new Omnivore(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(600));
+                }
             }
-        }
-        for (int i = 0; i < 3; i ++) {
-           // addObject(new Omnivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-        }
-        if(scavTotal <= 0){
-            for (int i = 0; i < 3; i ++) {
-                addObject(new Scavenger(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
+            if(scavTotal <= 0){
+                for (int i = 0; i < 3; i ++) {
+                    addObject(new Scavenger(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(600));
+                }
+                for (int i = 0; i < 6; i ++) {
+                    addObject(new Parasite(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(600));
+                }
             }
         }
     }
-
-    int algtotal;
 
     public void display(){
 
@@ -118,34 +120,5 @@ public class MyWorld extends World
         addObject(button, 750, 140 + 100 * _trophic_Level); 
     }
 
-    private void defult(){
-        if(algTotal <= 0){
-
-            for (int i = 0; i < 30; i ++) {
-                addObject(new Algae(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-            }
-        }
-        for (int i = 0; i < 6; i ++) {
-            addObject(new Parasite(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-        }
-        if(herbTotal <= 0){
-            for (int i = 0; i < 8; i ++) {
-                addObject(new Herbivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-            }
-        }
-        if(carnTotal <= 0){
-            for (int i = 0; i < 4; i ++) {
-                addObject(new Carnivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-            }
-        }
-        for (int i = 0; i < 3; i ++) {
-            addObject(new Omnivore(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-        }
-        if(scavTotal <= 0){
-            for (int i = 0; i < 3; i ++) {
-                addObject(new Scavenger(),Greenfoot.getRandomNumber(500),Greenfoot.getRandomNumber(500));
-            }
-        }
-    }
 
 }
