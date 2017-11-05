@@ -15,7 +15,7 @@ public class Sight extends Actor
     public Sight(){
 
     }
-
+  
     public Sight(AbstOrganism _o, int _range){
         range = _range; // Equals the range that was sent in from AI
         GreenfootImage image = new GreenfootImage(_range, _range); // Creates an empty transparent image with the given size
@@ -23,14 +23,14 @@ public class Sight extends Actor
         image.setColor(Color.YELLOW);        // Sets the color red
         image.fillOval(0, 0, _range, _range);   // Fills oval with the current color
         this.setImage(image);                  // Sets this as an actor image
-        image.setTransparency(10);
+        image.setTransparency(20);
         o = _o; // Lets say, Parent Organism
 
     }
 
     public void act() 
     { 
-        System.out.println("Range transferred: " + range);  // Just for testing
+       // System.out.println("Range transferred: " + range);  // Just for testing
 
         if(o.getWorld() != null ){ // Only if there are organisms in the World to get attached
 
@@ -41,6 +41,8 @@ public class Sight extends Actor
             getWorld().removeObject(this);  // If there is no Parent Organism and some how this actor gets added, it will delete then
 
         }
+        
+         
        
     }    
 

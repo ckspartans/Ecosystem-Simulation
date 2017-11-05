@@ -43,6 +43,15 @@ public class Carcass extends AbstOrganism
     public List<AbstOrganism> givesOffList() {
         return null;//not in use
     }
+       public List < AbstOrganism > givesOffList1() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
+        
+         public List < AbstOrganism > givesOffList2() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
 
     public void grow(){
 

@@ -10,8 +10,8 @@ import java.util.*;
 public class Omnivore extends Carnivore
 {
     protected int radius = 120; // radius, default using 1
-    protected Herbivore target = null; // when it is null, player has no target
-    protected Algae target2 = null; // when it is null, player has no target2
+  //  protected Herbivore target = null; // when it is null, player has no target
+  //  protected Algae target2 = null; // when it is null, player has no target2
     private int killCount = 0;
     private int tempTimer = 0;
 
@@ -39,6 +39,10 @@ public class Omnivore extends Carnivore
         age = 0; // An int that increments each time act runs to store the age
 
         energy = 10; 
+        
+        int attack = 7;
+        
+        int defense = 0;
 
         stats = new int [] {300, 2, 120, 2, 200, 2}; //traits for Herbivore 
 
@@ -83,17 +87,17 @@ public class Omnivore extends Carnivore
 
         }   
         
-        if (target == null) { // when player has no target2, using keyboard controller
+       // if (target == null) { // when player has no target2, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
-        } else { // else player moves automatically to the target2 
-            AI.hunt(this); // Attacks preys
-        }
+       // } else { // else player moves automatically to the target2 
+          //  AI.hunt(this); // Attacks preys
+       // }
         
-        if (target2 == null) { // when player has no target2, using keyboard controller
+     //   if (target2 == null) { // when player has no target2, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
-        } else { // else player moves automatically to the target2 
-            AI.hunt(this); // Attacks preys
-        }
+       // } else { // else player moves automatically to the target2 
+            //AI.hunt(this); // Attacks preys
+        //}
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
 
@@ -106,7 +110,7 @@ public class Omnivore extends Carnivore
             AbstOrganism.lifeforms.remove(algae);
             world.removeObject(algae);      // Removes Algae object
 
-            target2 = null; // clear the target2 after removing the apple
+          //  target2 = null; // clear the target2 after removing the apple
 
         }
 
@@ -121,7 +125,7 @@ public class Omnivore extends Carnivore
             AbstOrganism.lifeforms.remove(herbivore);
             world.removeObject(herbivore);      // Removes Algae object
 
-            target = null; // clear the target after removing the apple
+        //    target = null; // clear the target after removing the apple
 
         }
 
@@ -132,10 +136,16 @@ public class Omnivore extends Carnivore
         split();    // Reproduces when reaches the certain stage
     }
 
-    public List<Algae> givesOffList2(){
-        List<Algae> list = getObjectsInRange(range, Algae.class); // List of organisms around 
+    
+       public List<Herbivore> givesOffList() {
+
+        List<Herbivore> list = getObjectsInRange(range, Herbivore.class); // List of organisms around 
         return list;
+
     }
+        
+      
+    
      public void age() {
 
         age += 1; //Increase age by 1
@@ -157,6 +167,8 @@ public class Omnivore extends Carnivore
         this.setImage(image);
     }
 
+   
+        
     public void split(){
         angle_split = 360 / num_split;              // In which angle would the child go 
         // Check to see if there if enough energy (size?) to split

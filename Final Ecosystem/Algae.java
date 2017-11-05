@@ -39,6 +39,10 @@ public class Algae extends AbstOrganism
         energy = 10; //Starts with this energy
         stats = new int[] {300,1,1,2,200,2};
         Mutation.mutate(this);
+        attack = 0;
+
+        defense = 1;
+
     }
 
     public Algae(int[] newStats) {
@@ -88,6 +92,16 @@ public class Algae extends AbstOrganism
         return list;
     }
 
+     public List < AbstOrganism > givesOffList1() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
+        
+         public List < AbstOrganism > givesOffList2() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
+    
     public void eat() {
         // Increases the energy amount by absorbing sunlight 
         energy += 1;

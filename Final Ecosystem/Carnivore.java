@@ -16,8 +16,8 @@ public class Carnivore extends AbstOrganism
      */
 
     //Construct taget 
-    private Herbivore target = null; // when it is null, player has no target
-    private boolean hungry = false;
+  //  private Herbivore target = null; // when it is null, player has no target
+   // private boolean hungry = false;
     private int killCount = 0;
     private int tempTimer = 0;
 
@@ -36,6 +36,9 @@ public class Carnivore extends AbstOrganism
         energy = 100; 
         stats = new int [] {300, 2, 120, 2, 200, 2}; //traits for Carnivore 
         Mutation.mutate(this);
+        attack = 5;     // Attack level is 5
+        defense = 2 ;        // There is no one to attack Carnivore right now
+
     }
 
     public Carnivore (int [] newStats) {
@@ -70,11 +73,12 @@ public class Carnivore extends AbstOrganism
 
         }   
 
-        if (target == null && hungry == true) { // when player has no target, using keyboard controller
+      //  if (target == null && hungry == true) { // when player has no target, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
-        } else if (target != null && hungry == true) { // else player moves automatically to the target 
-            AI.hunt(this); // Attacks preys
-        }
+      //  }
+            //   } else if (target != null && hungry == true) { // else player moves automatically to the target 
+          //  AI.hunt(this); // Attacks preys
+      //  }
 
         Herbivore herbivore = (Herbivore) getOneIntersectingObject(Herbivore.class);//ensure that the preditor is tocuhing prey 
 
@@ -87,7 +91,7 @@ public class Carnivore extends AbstOrganism
             AbstOrganism.lifeforms.remove(herbivore);
             world.removeObject(herbivore);      // Removes Algae object
 
-            target = null; // clear the target after removing the apple
+           // target = null; // clear the target after removing the apple
 
         }
 
@@ -116,6 +120,19 @@ public class Carnivore extends AbstOrganism
         return list;
 
     }
+    
+       public List < AbstOrganism > givesOffList1() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
+        
+         public List < AbstOrganism > givesOffList2() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
+        
+  
+    
     public void hunger(){
         if(killCount >= 5){
             hungry = false;

@@ -130,6 +130,15 @@ public class Scavenger extends AbstOrganism
         return list;
     }
 
+       public List < AbstOrganism > givesOffList1() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
+        
+         public List < AbstOrganism > givesOffList2() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
     protected void hunt(){
         // getWorld().showText("Im dead", 159,225);
         // double valueX = 0; 

@@ -24,8 +24,8 @@ public class Herbivore extends AbstOrganism
      */
 
     // Base Constructor
-    protected Algae target = null; // when it is null, player has no target
-    private boolean hungry = false;
+   // protected Algae target = null; // when it is null, player has no target
+    //private boolean hungry = false;
     private int killCount = 0;
     private int tempTimer = 0;
 
@@ -47,6 +47,9 @@ public class Herbivore extends AbstOrganism
 
         this.range = range; // Range equals random number that is set during reproduction, how far the detection radius is for the organism
         Mutation.mutate(this);
+        
+        attack = 3;
+        defense = 1;    // Defending armour level 2
     }
 
     public Herbivore (int [] newStats) {
@@ -85,20 +88,20 @@ public class Herbivore extends AbstOrganism
 
         }   
 
-        if (target == null && hungry == true) { // when player has no target, using keyboard controller
+       // if (target == null && hungry == true) { // when player has no target, using keyboard controller
             AI.checkPrey(this); // after each movement, check whether the food is in sight
             AI.checkPredator(this);
-        } else if (target != null && hungry == true) { // else player moves automatically to the target 
-            AI.hunt(this); // Attacks preys
-            AI.flee(this);
-        }
+       // } else if (target != null && hungry == true) { // else player moves automatically to the target 
+           // AI.hunt(this); // Attacks preys
+          //  AI.flee(this);
+    //    }
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
         if (algae != null) {
             ((MyWorld) getWorld()).foodEaten ++;          // Increases foodeaten, a variable in My World
             energy += (algae.energy)/2; //energy gained after eating
             ((MyWorld) getWorld()).removeObject(algae);      // Removes Algae object
-            target = null; // clear the target after removing the apple
+          //  target = null; // clear the target after removing the apple
 
         }
 
@@ -133,6 +136,16 @@ public class Herbivore extends AbstOrganism
         List<Algae> list = getObjectsInRange(range, Algae.class); // List of Algae around 
         return list;
     }
+    
+       public List < AbstOrganism > givesOffList1() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
+        
+         public List < AbstOrganism > givesOffList2() {
+         List < AbstOrganism > list = getObjectsInRange(range, AbstOrganism.class); // List of organisms around 
+        return list;
+        }
 
     protected List givesOffListPredator(){ // List of predator around
         List<Carnivore> list = getObjectsInRange(range, Carnivore.class); // List of Carnvivores around 

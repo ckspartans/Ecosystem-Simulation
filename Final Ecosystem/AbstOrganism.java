@@ -40,6 +40,10 @@ public abstract class AbstOrganism extends Actor
 
     protected int trophicLvl;
     
+    protected Sight mySight;
+    
+    protected boolean hungry = false;
+    
     // Mutatable Stats
 
     protected int[] stats = new int [6]; // An int array storing the mutatable stats of the organism
@@ -56,12 +60,20 @@ public abstract class AbstOrganism extends Actor
 
     protected int mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
 
+    protected int attack;
+
+    protected int defense;
 
     public void act(){
     }
     
     protected abstract List givesOffList(); // List of organisms around
     
+     protected abstract List givesOffList1(); // List of organisms around
+     
+      protected abstract List givesOffList2(); // List of organisms around
+      
+      
     protected abstract List givesOffListPredator(); // List of organisms around
 
     protected abstract void eat(); //determins amount of energy one gains, % of the prey's enrgy, for algae this is a constant intake  
