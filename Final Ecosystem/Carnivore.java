@@ -18,7 +18,7 @@ public class Carnivore extends AbstOrganism
     //Construct taget 
   //  private Herbivore target = null; // when it is null, player has no target
    // private boolean hungry = false;
-    private int killCount = 0;
+  //  private int killCount = 0;
     private int tempTimer = 0;
 
     public Carnivore() {
@@ -33,7 +33,7 @@ public class Carnivore extends AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 100; 
+        energy = 50; 
         stats = new int [] {300, 2, 120, 2, 200, 2, 5, 2}; //traits for Carnivore 
         Mutation.mutate(this);
         attack = 5;     // Attack level is 5
@@ -53,7 +53,7 @@ public class Carnivore extends AbstOrganism
         prey = new ArrayList <AbstOrganism> ();//list of all that the types of organism can feed on
         predators = new ArrayList <AbstOrganism> ();//list of all the types of organsims that the organism can be eaten by   
         age = 0; // An int that increments each time act runs to store the age
-        energy = 500; //Starts with zero energy
+        energy = 50; //Starts with zero energy
         stats = newStats; //traits for Herbivore 
     }
 
@@ -102,14 +102,16 @@ public class Carnivore extends AbstOrganism
         hunger();
     }
 
-    protected void fights(int _energy){    // Basically the calculation of attack and defense 
+    protected void fights(int _energy, AbstOrganism hunter){    // Basically the calculation of attack and defense 
+      
         energy += _energy;
         if(energy < 0){
+            hunter.killCount++;
             die();
         }
-
     }
-
+    
+   
     public List<Herbivore> givesOffList() {
 
         List<Herbivore> list = getObjectsInRange(range, Herbivore.class); // List of organisms around 
@@ -130,6 +132,7 @@ public class Carnivore extends AbstOrganism
   
     
     public void hunger(){
+        say(""+killCount);
         if(killCount >= 5){
             hungry = false;
         }

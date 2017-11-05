@@ -11,13 +11,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class AI  
 {
     
-      public static void doHerbivore(Herbivore he) {////
-        List<Carnivore> predators = he.givesOffListPredator();
-        List<Algae> preys = he.givesOffList();
-        if (!predators.isEmpty()) {
+      public static void doHerbivore(Herbivore he) {    // To decide whether to go for food or not(Checks how far away is predator)
+        List<Carnivore> predators = he.givesOffListPredator();  // List of predators
+        List<Algae> preys = he.givesOffList();                  // List of Preys
+        if (!predators.isEmpty()) {                             // When they are not empty 
             if (!preys.isEmpty()) {
                 List<Actor> actors = new ArrayList<Actor>();
-                actors.addAll(preys);
+                actors.addAll(preys);                           // Adds up all preys in that array list
                 Algae prey = (Algae) getTheCloset(he, actors);
                 actors.clear();
                 actors.addAll(predators);
@@ -37,113 +37,113 @@ public class AI
         }
     }
 
-    public static void checkPrey(AbstOrganism Org2){
+    public static void checkPrey(AbstOrganism attacker){
         AbstOrganism target = null;         // This is the variable that stores target 
 
-        if(!Org2.givesOffList().isEmpty()){   // Checks the organisms if any within that radius
+        if(!attacker.givesOffList().isEmpty()){   // Checks the organisms if any within that radius
 
-            target = (AbstOrganism) getTheCloset(Org2, Org2.givesOffList() ); // always set the first one in the list as the target
+            target = (AbstOrganism) getTheCloset(attacker, attacker.givesOffList() ); // always set the first one in the list as the target
 
-            // target = (AbstOrganism) getTheCloset(Org2, Org2.givesOffList() );
-            if(target!=null && Org2.hungry == true){ // If there are preys in range
+            // target = (AbstOrganism) getTheCloset(attacker, attacker.givesOffList() );
+            if(target!=null && attacker.hungry == true){ // If there are preys in range
 
-                if(Defaults.calcDistance(Org2, target)<10){ // Attack only gets called when their distance is less than 10
+                if(Defaults.calcDistance(attacker, target)<10){ // Attack only gets called when their distance is less than 10
 
-                    attack(Org2, target);     // Calls the function
+                    attack(attacker, target);     // Calls the function
 
                 }
 
-                hunt(Org2, target); //Kills
+                hunt(attacker, target); //Kills
 
 
                 // This is basically for user to see the predator's sight
-                activateBoundary(Org2, Org2.range);     // If the predator sees prey, then its border gets activated
+                activateBoundary(attacker, attacker.range);     // If the predator sees prey, then its border gets activated
 
             }else{
 
-                //   Org2.world.removeObject(Org2.mySight);      // Removes from world
+                //   attacker.world.removeObject(attacker.mySight);      // Removes from world
 
             }
 
         }
     }
     
-    public static void checkOmnivorePrey(Omnivore Org2){
+    public static void checkOmnivorePrey(Omnivore attacker){
         
         AbstOrganism target = null;         // This is the variable that stores target
         Algae targetB = null; // This is the closest algae
         Herbivore targetC = null; // This is the closest herbivore
         
-        if (Org2.hungry == true) {
-            if(!Org2.givesOffListA().isEmpty() && !Org2.givesOffListH().isEmpty()){   // Checks the organisms if any within that radius
+        if (attacker.hungry == true) {
+            if(!attacker.givesOffListA().isEmpty() && !attacker.givesOffListH().isEmpty()){   // Checks the organisms if any within that radius
     
-                targetB = getTheClosestAlgae(Org2, Org2.givesOffListA()); // always set the first one in the list as the target
-                targetC = getTheClosestHerbivore(Org2, Org2.givesOffListH());
+                targetB = getTheClosestAlgae(attacker, attacker.givesOffListA()); // always set the first one in the list as the target
+                targetC = getTheClosestHerbivore(attacker, attacker.givesOffListH());
                 if (targetB != null && targetC != null) {
                     
-                    target = (AbstOrganism) closestOfTwo(Org2, targetB, targetC);
+                    target = (AbstOrganism) closestOfTwo(attacker, targetB, targetC);
                     
                 }
-                // target = (AbstOrganism) getTheCloset(Org2, Org2.givesOffList() );
+                // target = (AbstOrganism) getTheCloset(attacker, attacker.givesOffList() );
                 if(target!=null){ // If there are preys in range
     
-                    if(Defaults.calcDistance(Org2, target)<10){ // Attack only gets called when their distance is less than 10
+                    if(Defaults.calcDistance(attacker, target)<10){ // Attack only gets called when their distance is less than 10
     
-                        attack(Org2, target);     // Calls the function
+                        attack(attacker, target);     // Calls the function
     
                     }
     
-                    hunt(Org2, target); //Kills
+                    hunt(attacker, target); //Kills
     
     
                     // This is basically for user to see the predator's sight
-                    activateBoundary(Org2, Org2.range);     // If the predator sees prey, then its border gets activated
+                    activateBoundary(attacker, attacker.range);     // If the predator sees prey, then its border gets activated
     
                 }else{
     
-                    //   Org2.world.removeObject(Org2.mySight);      // Removes from world
+                    //   attacker.world.removeObject(attacker.mySight);      // Removes from world
     
                 }
     
-            } else if (!Org2.givesOffListA().isEmpty()) { // If some algae are found in range
+            } else if (!attacker.givesOffListA().isEmpty()) { // If some algae are found in range
                 
-                target = (AbstOrganism) getTheClosestAlgae(Org2, Org2.givesOffListA()); // always set the first one in the list as the target
+                target = (AbstOrganism) getTheClosestAlgae(attacker, attacker.givesOffListA()); // always set the first one in the list as the target
                 
                 if(target!=null){ // If there are preys in range
     
-                    if(Defaults.calcDistance(Org2, target)<10){ // Attack only gets called when their distance is less than 10
+                    if(Defaults.calcDistance(attacker, target)<10){ // Attack only gets called when their distance is less than 10
     
-                        attack(Org2, target);     // Calls the function
+                        attack(attacker, target);     // Calls the function
     
                     }
     
-                    hunt(Org2, target); //Kills
+                    hunt(attacker, target); //Kills
     
     
                     // This is basically for user to see the predator's sight
-                    activateBoundary(Org2, Org2.range);     // If the predator sees prey, then its border gets activated
+                    activateBoundary(attacker, attacker.range);     // If the predator sees prey, then its border gets activated
     
                 }else{
         
                 }
                 
-            } else if (!Org2.givesOffListH().isEmpty()) { // If some herbivores can be found in range
+            } else if (!attacker.givesOffListH().isEmpty()) { // If some herbivores can be found in range
                 
-                target = (AbstOrganism) getTheClosestHerbivore(Org2, Org2.givesOffListH()); // always set the first one in the list as the target
+                target = (AbstOrganism) getTheClosestHerbivore(attacker, attacker.givesOffListH()); // always set the first one in the list as the target
                 
                 if(target!=null){ // If there are preys in range
     
-                    if(Defaults.calcDistance(Org2, target)<10){ // Attack only gets called when their distance is less than 10
+                    if(Defaults.calcDistance(attacker, target)<10){ // Attack only gets called when their distance is less than 10
     
-                        attack(Org2, target);     // Calls the function
+                        attack(attacker, target);     // Calls the function
     
                     }
     
-                    hunt(Org2, target); //Kills
+                    hunt(attacker, target); //Kills
     
     
                     // This is basically for user to see the predator's sight
-                    activateBoundary(Org2, Org2.range);     // If the predator sees prey, then its border gets activated
+                    activateBoundary(attacker, attacker.range);     // If the predator sees prey, then its border gets activated
     
                 }else{
         
@@ -153,25 +153,25 @@ public class AI
         }   
     }   
 
-    public static void activateBoundary(AbstOrganism Org2, int range){
-        if(Org2 != null ){          // If Organism that the sight class is attaching is not null
-            Org2.world.removeObject(Org2.mySight);      // Removes from world
-            Org2.mySight = new Sight(Org2, range);      // Reference to the sight actor class  
-            Org2.world.addObject(Org2.mySight, Org2.getX(), Org2.getY());
+    public static void activateBoundary(AbstOrganism attacker, int range){
+        if(attacker != null ){          // If Organism that the sight class is attaching is not null
+            attacker.world.removeObject(attacker.mySight);      // Removes from world
+            attacker.mySight = new Sight(attacker, range);      // Reference to the sight actor class  
+            attacker.world.addObject(attacker.mySight, attacker.getX(), attacker.getY());
         }
 
     }
 
-    public static void deleteBoundary(AbstOrganism Org2 ,Sight mySight){    // This deletes the mySight actor
+    public static void deleteBoundary(AbstOrganism attacker ,Sight mySight){    // This deletes the mySight actor
         // Not sure if I need this 
-        Org2.world.removeObject(mySight);      // Removes from world
+        attacker.world.removeObject(mySight);      // Removes from world
 
     }
 
-    public static void checkPredator(AbstOrganism Org2){ // Predator checking
+    public static void checkPredator(AbstOrganism attacker){ // Predator checking
         AbstOrganism runAway = null;        // Sets it to null, this saves the list of predators around
 
-        if(Org2.givesOffListPredator().isEmpty() || Org2 ==null){ //If no predator
+        if(attacker.givesOffListPredator().isEmpty() || attacker ==null){ //If no predator
 
             return; // Gets out of the function
 
@@ -179,63 +179,59 @@ public class AI
 
         else {
 
-            runAway = (AbstOrganism) Org2.givesOffListPredator().get(0); // always set the first one in the list as the target
+            runAway = (AbstOrganism) attacker.givesOffListPredator().get(0); // always set the first one in the list as the target
 
             if(runAway!=null){ // If no predators
 
-                flee(Org2, runAway); // Runsaway
+                flee(attacker, runAway); // Runsaway
 
             }
         }
 
     }
 
-    public static void flee(AbstOrganism Org2, AbstOrganism runAway){ // This method lets preys to run away whenever they see Predators
+    public static void flee(AbstOrganism attacker, AbstOrganism runAway){ // This method lets preys to run away whenever they see Predators
 
-        Org2.turnTowards(runAway.getX(),runAway.getY());         // Turns away the predator       
+        attacker.turnTowards(runAway.getX(),runAway.getY());         // Turns away the predator       
 
-        Org2.turn(180); // Turns 180
-        Org2.move(Org2.speed);
-         Org2.move(2);
+        attacker.turn(180); // Turns 180
+        attacker.move(attacker.speed);
+         //attacker.move(2);
     }
 
-    public static void hunt(AbstOrganism Org2, AbstOrganism target){ // Hunting
+    public static void hunt(AbstOrganism attacker, AbstOrganism target){ // Hunting
         if(target.energy > 0){
-            Org2.turnTowards(target.getX(), target.getY());         // Turns toward the food
+            attacker.turnTowards(target.getX(), target.getY());         // Turns toward the food
 
             target = null;
 
-            Org2.move(Org2.speed);          //Moves with the speed assigned before
-          //  Org2.move(5);
+            attacker.move(attacker.speed);          //Moves with the speed assigned before
+          //  attacker.move(5);
         }
 
     }
 
-    public static void attack(AbstOrganism Org2, AbstOrganism target){      // This is meant for making them fight each other
+    public static void attack(AbstOrganism attacker, AbstOrganism target){      // This is meant for making them fight each other
         int addEnergy=0;           // Energy that will be added based on whos fighting and against who
-        Org2.world.showText("Eneg : "+ addEnergy, 100, 450);        // Just for testing
-        if(Org2.trophicLvl == 3){     // If it is Carnivore
-            addEnergy = (Org2.attack - target.defense); // It basically gives you the positive value
-            Org2.fights(addEnergy); // then that positive value(addEnergy) will be added to organism's energy
+        //attacker.world.showText("Eneg : "+ addEnergy, 100, 450);        // Just for testing
+        if(attacker.trophicLvl == 5 || attacker.trophicLvl == 3 || attacker.trophicLvl == 2){     // If it is Omnivore
+            addEnergy = (attacker.attack - target.defense); // It basically gives you the positive value
+            attacker.fights(addEnergy, attacker); // then that positive value(addEnergy) will be added to organism's energy
 
         }
-        if(Org2.trophicLvl == 2){       // If it is Herbivore
 
-            addEnergy = (Org2.attack - target.defense);// It basically gives you the positive value
-            Org2.fights(addEnergy); // then that positive value(addEnergy) will be added to organism's energy
+        if(target.trophicLvl == 2 ){       // If it is Herbivore
 
-        }
-        if(target.trophicLvl == 2){       // If it is Herbivore
-
-            addEnergy = (target.defense - Org2.attack); // It gives you negative 
-            target.fights(addEnergy); // Negative value when added to energy subtracts the orgs. energy
+            
+            addEnergy = (target.defense - attacker.attack); // It gives you negative 
+            target.fights(addEnergy, attacker); // Negative value when added to energy subtracts the orgs. energy
 
         }
         if(target.trophicLvl == 1){         // If it is Algae
             target.move(10);     // Just to make it look like its defending 
             target.turn(40);       // Just to make it look like its defending 
-            addEnergy = (target.defense - Org2.attack); // It gives you negative 
-            target.fights(addEnergy);    // Negative value when added to energy subtracts the orgs. energy
+            addEnergy = (target.defense - attacker.attack); // It gives you negative 
+            target.fights(addEnergy, attacker);    // Negative value when added to energy subtracts the orgs. energy
 
         }
         // When Omnivore attacks Carnivore, then we will do (Att.this - Att.other)
@@ -243,65 +239,65 @@ public class AI
         // When energy goes negative, they die
     }
 
-    public static Actor getTheCloset(Actor actor, List<Actor> actors) {////
-        Actor closetActor = null;
-        int distance = 100;
-        for (Actor a : actors) {
-            int d = (int) Defaults.calcDistance((AbstOrganism)actor, (AbstOrganism)a);
-            if (d <= distance) {
-                closetActor = a;
-                distance = d;
+    public static Actor getTheCloset(Actor actor, List<Actor> actors) {     // Gets the closest one
+        Actor closestActor = null;      // Its null at first 
+        int distance = 100;             // Minimum distance that will be compared is 100
+        for (Actor a : actors) {        // Goes through every actors
+            int d = (int) Defaults.calcDistance((AbstOrganism)actor, (AbstOrganism)a);  // It calculates the distance between predators and preys
+            if (d <= distance) {        // If their distance is shorter than 100 then it will go for it
+                closestActor = a;       // Sets the target to that 'a' actor
+                distance = d;           // Sets the value of distance as a d
             }
 
         }
-        return closetActor;
+        return closestActor;            // returns the closest actor
     }
     
-    public static Algae getTheClosestAlgae (Omnivore actor, List<Algae> actors) {////
-        Algae closestActor = null;
-        int distance = 100;
-        for (Algae a : actors) {
-            int d = (int) Defaults.calcDistance((AbstOrganism)actor, (AbstOrganism)a);
-            if (d <= distance) {
-                closestActor = a;
-                distance = d;
+    public static Algae getTheClosestAlgae (Omnivore actor, List<Algae> actors) {  // // Gets the closest one
+        Algae closestActor = null;       // Its null at first 
+        int distance = 100; // Minimum distance that will be compared is 100
+        for (Algae a : actors) {// Goes through every actors
+            int d = (int) Defaults.calcDistance((AbstOrganism)actor, (AbstOrganism)a); // It calculates the distance between predators and preys
+            if (d <= distance) {// If their distance is shorter than 100 then it will go for it
+                closestActor = a; // Sets the target to that 'a' actor
+                distance = d;// Sets the value of distance as a d
             }
 
         }
-        return closestActor;
+        return closestActor; // returns the closest actor
     }
     
-    public static Herbivore getTheClosestHerbivore (Omnivore actor, List<Herbivore> actors) {////
+    public static Herbivore getTheClosestHerbivore (Omnivore actor, List<Herbivore> actors) { // Gets the closest one
         Herbivore closestActor = null;
-        int distance = 100;
-        for (Herbivore a : actors) {
-            int d = (int) Defaults.calcDistance((AbstOrganism)actor, (AbstOrganism)a);
-            if (d <= distance) {
-                closestActor = a;
-                distance = d;
+       int distance = 100; // Minimum distance that will be compared is 100
+        for (Herbivore a : actors) {// Goes through every actors
+            int d = (int) Defaults.calcDistance((AbstOrganism)actor, (AbstOrganism)a); // It calculates the distance between predators and preys
+            if (d <= distance) {// If their distance is shorter than 100 then it will go for it
+                closestActor = a; // Sets the target to that 'a' actor
+                distance = d;// Sets the value of distance as a d
             }
 
         }
-        return closestActor;
+        return closestActor; // returns the closest actor
     }
     
     public static Actor closestOfTwo (Actor actorA, Actor actorB, Actor actorC) { // Takes in the central actor (actorA), actorB and actorC, checks which of B or C is closer and returns that one
-        Actor closestActor = null;
-        int distance = 100;
-        int distAB = (int) Defaults.calcDistance((AbstOrganism)actorA, (AbstOrganism)actorB);
-        int distAC = (int) Defaults.calcDistance((AbstOrganism)actorA, (AbstOrganism)actorC);
-        if (distAB < distAC) {
-            closestActor = actorB;
+        Actor closestActor = null;      // It is set null at first
+        int distance = 100;             // Minimum distance is 100
+        int distAB = (int) Defaults.calcDistance((AbstOrganism)actorA, (AbstOrganism)actorB);   // Calculates distance between Target A and B
+        int distAC = (int) Defaults.calcDistance((AbstOrganism)actorA, (AbstOrganism)actorC);   // Calculates distance between Target B and C
+        if (distAB < distAC) {          // Is distance between AB short than AC
+            closestActor = actorB;      // If it is then closest one is target B
             distance = distAB;
         } else {
             
-            closestActor = actorC;
+            closestActor = actorC;      // Otherwise closest one is target B
             distance = distAC;
                 
         }
 
         
-        return closestActor;
+        return closestActor;            // Returns closest
     }
 }
 

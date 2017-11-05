@@ -41,12 +41,17 @@ public abstract class AbstOrganism extends Actor
     protected int trophicLvl;
     
     protected Sight mySight;
+  
     
     protected boolean hungry = false;
     
     // Mutatable Stats
 
-    protected int[] stats = new int [6]; // An int array storing the mutatable stats of the organism
+    protected int killCount = 0; // The number of organisms an organism has killed
+    
+    // Mutatable Stats
+
+    protected int[] stats = new int [8]; // An int array storing the mutatable stats of the organism
 
     protected int lifespan = stats [0]; //max limit an organism can be in the world 
 
@@ -60,10 +65,9 @@ public abstract class AbstOrganism extends Actor
 
     protected int mutation_rate = stats [5]; // An int which determines how many random gene stats can be changed
 
-    protected int attack;
+    protected int attack = stats [6]; // An int determining the attacking of an organism
 
-    protected int defense;
-
+    protected int defense = stats [7]; // An int determining the sdefense of an organism, counters the opponent's attack
     public void act(){
     }
     
@@ -82,7 +86,7 @@ public abstract class AbstOrganism extends Actor
 
     protected abstract void split(); //preforms the splitting of the organism, creats the number of offspring, energy is split up, sopme energy is lost in the process
     
-    protected abstract void fights(int _energy);
+    protected abstract void fights(int _energy, AbstOrganism hunter);
     
     protected abstract void age(); //a counter that keeps increasing as a means of time 
 

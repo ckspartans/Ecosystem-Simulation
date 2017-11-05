@@ -138,7 +138,7 @@ public class Algae extends AbstOrganism
         }
     }
     
-      protected void fights(int _energy){    // Basically the calculation of attack and defense 
+      protected void fights(int _energy,  AbstOrganism hunter){    // Basically the calculation of attack and defense 
         energy += _energy;
         if(energy < 0){
             die();
@@ -161,7 +161,11 @@ public class Algae extends AbstOrganism
         // Remove this object from its lists
         lifeforms.remove(this);
         // Remove from the world
+        if(this!=null){
         world.removeObject(this);
+    }else{
+        return;
+    }
     }
 
     public void shift() {

@@ -264,7 +264,7 @@ public class Scavenger extends AbstOrganism
 
     }
 
-      protected void fights(int _energy){    // Basically the calculation of attack and defense 
+      protected void fights(int _energy,  AbstOrganism hunter){    // Basically the calculation of attack and defense 
     
     }
 }

@@ -99,7 +99,7 @@ public class MyWorld extends World
         int carcTotal = getObjects(Carcass.class).size();   // Total herbivores in the screen
         showText("Carcasses: "+carcTotal, 100,350);
 
-        showText("foodEaten: "+foodEaten, 100,400);     // Total food they ate
+       // showText("foodEaten: "+foodEaten, 100,400);     // Total food they ate
 
         // The UI Text
 

@@ -17,10 +17,12 @@ public class Carcass extends AbstOrganism
 
     public Carcass (double energy) {
         leftEnergy = energy; //energy of the living organism is now
+        energy += 50;
     }
 
     public Carcass () {
         leftEnergy = energy; //energy of the living organism is now
+        energy += 50;
     }
 
     public void act() 
@@ -83,7 +85,7 @@ public class Carcass extends AbstOrganism
         }
     }
 
-    protected void fights(int _energy){    // Basically the calculation of attack and defense 
+    protected void fights(int _energy, AbstOrganism hunter){    // Basically the calculation of attack and defense 
 
      }
 

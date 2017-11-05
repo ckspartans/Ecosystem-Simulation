@@ -26,7 +26,7 @@ public class Herbivore extends AbstOrganism
     // Base Constructor
    // protected Algae target = null; // when it is null, player has no target
     //private boolean hungry = false;
-    private int killCount = 0;
+  //  private int killCount = 0;
     private int tempTimer = 0;
 
     public Herbivore () {
@@ -97,6 +97,8 @@ public class Herbivore extends AbstOrganism
            // AI.hunt(this); // Attacks preys
           //  AI.flee(this);
     //    }
+    
+        world.showText("kill Count" + killCount, 100,500);
 
         Algae algae = (Algae) getOneIntersectingObject(Algae.class);
         if (algae != null) {
@@ -159,14 +161,17 @@ public class Herbivore extends AbstOrganism
 
     }
 
-    protected void fights(int _energy){
+     protected void fights(int _energy, AbstOrganism hunter){    // Basically the calculation of attack and defense 
+     
         energy += _energy;
         if(energy < 0){
+            hunter.killCount++;
+       
             die();
         }
-
-     }
-
+    }
+    
+   
     public void grow() {
         // Modify the size+10 of the image based on  the current energy
         size = (int) (0.02 * energy + 5); //Change in size+10

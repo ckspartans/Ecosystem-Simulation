@@ -162,18 +162,18 @@ public class Mutation extends Actor
                 } else if (mutating == 3) { // num_split
     
     
-                    if (stats [mutating] - 1 >= 1 && stats [mutating] + 1 <= 5) { // If the least and greatest possible values of this mutation will not be less than the minimum or more than the maximum
+                   if (stats [mutating] - 1 >= 1 && stats [mutating] + 1 <= 8) { // If the least and greatest possible values of this mutation will not be less than the minimum or more than the maximum
                         
-                        stats [mutating] = (int) organism.getRandomNumber(stats [mutating] - 1, stats [mutating] + 1); 
+                       stats [mutating] = (int) organism.getRandomNumber(stats [mutating] - 1, stats [mutating] + 1); 
                     
-                    } else if (stats [mutating] + 1 <= 5) { // Checks if this mutation will "never" be more than the maximum
+                    } else if (stats [mutating] + 1 <= 8) { // Checks if this mutation will "never" be more than the maximum
                     
                         stats [mutating] = (int) organism.getRandomNumber(1, stats [mutating] + 1); // This means it would've been possible to have the value be less than the minimum, so instead of a random minimum, the maximum is used. Similar to the next else statement, but for the maximum
-                    
+    
                     } else {
-                        
-                        stats [mutating] = (int) organism.getRandomNumber(stats [mutating] - 1, 5); // This last case means that it would've been possible for the random value to be greater than the maxmimum value, so the getRandomNumber function's maximum is limited
-                        
+    
+                        stats [mutating] = (int) organism.getRandomNumber(stats [mutating] - 1, 8); // This last case means that it would've been possible for the random value to be greater than the maxmimum value, so the getRandomNumber function's maximum is limited
+    
                     }
   
     
@@ -464,7 +464,7 @@ public class Mutation extends Actor
                     
                     } else {
                         
-                        stats [mutating] = (int) organism.getRandomNumber(stats [mutating] - 1, 5); // This last case means that it would've been possible for the random value to be greater than the maxmimum value, so the getRandomNumber function's maximum is limited
+                        stats [mutating] = (int) organism.getRandomNumber(stats [mutating] - 1, 8); // This last case means that it would've been possible for the random value to be greater than the maxmimum value, so the getRandomNumber function's maximum is limited
                         
                     }
           

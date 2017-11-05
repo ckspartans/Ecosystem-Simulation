@@ -12,7 +12,7 @@ public class Omnivore extends Carnivore
     protected int radius = 120; // radius, default using 1
   //  protected Herbivore target = null; // when it is null, player has no target
   //  protected Algae target2 = null; // when it is null, player has no target2
-    private int killCount = 0;
+    //private int killCount = 0;
     private int tempTimer = 0;
 
     public Omnivore() {
